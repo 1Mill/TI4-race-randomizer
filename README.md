@@ -2,8 +2,22 @@
 
 > Race selector for the board game Twilight Imperium 4th Edition (TI4)
 
-## Build Setup
+# Development
+Start the application in development mode
+``` bash
+docker-compose up --build
+```
+then look at localhost:4000 within your browser.
 
+# Build
+First generate the static pages using
+``` bash
+docker-compose run web yarn generate
+```
+then, move the generated files from /dist to AWS.
+
+
+## Nuxt commands within the Docker Container
 ``` bash
 # install dependencies
 $ yarn install
