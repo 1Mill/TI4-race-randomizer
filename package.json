@@ -1,0 +1,19 @@
+{
+  "name": "twilight-imperium-4-race-selector",
+  "version": "1.0.0",
+  "description": "Race selector for the board game Twilight Imperium 4th Edition (TI4)",
+  "author": "1MiLL",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
+}
