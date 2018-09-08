@@ -51,5 +51,14 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+
+  /*
+  ** Force server to check for changes within files in development
+  */
+  watchers: {
+    webpack: {
+      poll: true
+    }
   }
 }
