@@ -9,6 +9,10 @@ const createStore = () => {
     mutations: {
 		setStoreRaces: function (state, payload) {
 			state.races = payload
+		},
+
+		addActiveAttributeToRaces: function (state) {
+			state.races.forEach(function(e) { e.active = true })
 		}
     },
 
@@ -16,6 +20,7 @@ const createStore = () => {
 		async nuxtServerInit ({ commit }) {
 			const data = await this.$axios.$get(`/TI4_RaceData.json`)
 			commit('setStoreRaces', data)
+			commit('addActiveAttributeToRaces')
 		}
 	},
 
