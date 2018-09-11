@@ -10,12 +10,14 @@
 		<div
 		v-for='race in races' :key='race.name'
 		>
-			<input
-			type='checkbox' :checked='race.active'
-			@click='toggleRaceActiveStatus(race)'
-			>
-			{{ race.name }}
-			</input>
+			<label>
+				<input
+				type='checkbox' :checked='race.active'
+				@click='toggleRaceActiveStatus(race)'
+				>
+					{{ race.name }}
+				</input>
+			</label>
 		</div>
 
 		<div>
