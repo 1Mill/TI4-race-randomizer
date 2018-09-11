@@ -3,6 +3,8 @@ version: '3'
 services:
   client:
     build: ./client
+    depends_on:
+      - api
     environment:
       - HOST=0.0.0.0
       - PORT=3000
