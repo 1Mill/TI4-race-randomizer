@@ -13,7 +13,11 @@ const createStore = () => {
 
 		addActiveAttributeToRaces: function (state) {
 			state.races.forEach(function(e) { e.active = true })
-		}
+		},
+
+		changeRaceActiveStatus: function (race) {
+			race.active = !race.active
+		},
     },
 
 	actions: {
@@ -21,6 +25,10 @@ const createStore = () => {
 			const data = await this.$axios.$get(`/TI4_RaceData.json`)
 			commit('setStoreRaces', data)
 			commit('addActiveAttributeToRaces')
+		},
+
+		toggleRaceActiveStatus ({ commit }, race) {
+			commit('changeRaceActiveStatus', race)
 		}
 	},
 
