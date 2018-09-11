@@ -22,7 +22,7 @@ const createStore = () => {
 
 	actions: {
 		async nuxtServerInit ({ commit }) {
-			const data = await this.$axios.$get(`/TI4_RaceData.json`)
+			const data = await this.$axios.$get(`/races`)
 			commit('setStoreRaces', data)
 			commit('addActiveAttributeToRaces')
 		},
