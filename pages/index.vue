@@ -19,10 +19,6 @@
 				</input>
 			</label>
 		</div>
-
-		<div>
-			{{ active_races }}
-		</div>
 	</div>
 </template>
 
@@ -32,8 +28,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
 	computed: {
 		...mapGetters([
-			'races',
-			'active_races'
+			'races'
 		])
 	},
 
