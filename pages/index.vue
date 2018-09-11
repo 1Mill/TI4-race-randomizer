@@ -10,7 +10,12 @@
 		<div
 		v-for='race in races' :key='race.name'
 		>
-			{{ race.name }} {{ race.active }}
+			<input
+			type='checkbox' :checked='race.active'
+			@click='toggleRaceActiveStatus(race)'
+			>
+			{{ race.name }}
+			</input>
 		</div>
 
 		<div>
@@ -20,13 +25,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	computed: {
 		...mapGetters([
 			'races',
 			'active_races'
+		])
+	},
+
+	methods: {
+		...mapActions([
+			'toggleRaceActiveStatus'
 		])
 	}
 }
