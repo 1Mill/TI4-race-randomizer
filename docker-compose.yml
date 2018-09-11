@@ -11,3 +11,11 @@ services:
     ports:
       - 4000:3000
     command: yarn nuxt
+
+  api:
+    build: ./api
+    volumes:
+      - ./api:/app
+    ports:
+      - 4001:3000
+    command: yarn json-server --watch db.json --host 0.0.0.0
