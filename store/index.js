@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      races: []
+      races: [],
     },
 
     mutations: {
@@ -25,6 +25,13 @@ const createStore = () => {
 	},
 
 	getters: {
+		races: function (state) {
+			return state.races
+		},
+
+		active_races: function (state) {
+			return state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
+		}
 	}
   })
 }
