@@ -1,13 +1,23 @@
 version: '3'
 
 services:
-  web:
-    build: .
+  client:
+    build: ./client
+    depends_on:
+      - api
     environment:
       - HOST=0.0.0.0
       - PORT=3000
     volumes:
-      - ./:/app
+      - ./client:/app
     ports:
-      - 4000:3000
+      - 3000:3000
     command: yarn nuxt
+
+  api:
+    build: ./api
+    volumes:
+      - ./api:/app
+    ports:
+      - 3001:3000
+    command: yarn json-server --watch db.json --host 0.0.0.0 --port 3000

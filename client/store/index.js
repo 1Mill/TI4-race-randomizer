@@ -17,12 +17,12 @@ const createStore = () => {
 
 		changeRaceActiveStatus: function (race) {
 			race.active = !race.active
-		},
+		}
     },
 
 	actions: {
 		async nuxtServerInit ({ commit }) {
-			const data = await this.$axios.$get(`/TI4_RaceData.json`)
+			const data = await this.$axios.$get(`/races`)
 			commit('setStoreRaces', data)
 			commit('addActiveAttributeToRaces')
 		},
