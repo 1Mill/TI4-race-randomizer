@@ -9,10 +9,10 @@ docker-compose up --build
 ```
 then look at localhost:4000 within your browser.
 
-# Build
+# Generate Static Site
 First generate the static pages using
 ``` bash
-docker-compose run web yarn generate
+docker-compose run client yarn nuxt generate
 ```
 then, move the generated files from /dist to AWS.
 
