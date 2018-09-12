@@ -18,6 +18,11 @@
 
 		<br /><br />
 
+		<label>Player Names (seperated by ;)</label>
+		<textarea v-model='player_names' placeholder='Dan; Bob; June; May'/>
+
+		<br /><br />
+
 		<label>Races per Player: </label> <span>{{ races_per_player }}</span>
 		<label
 		v-for='number in races_per_player_options' :key='number+100'
@@ -47,6 +52,12 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
+	data: function () {
+		return {
+			player_names: ''
+		}
+	},
+
 	computed: {
 		...mapState([
 			'races',
