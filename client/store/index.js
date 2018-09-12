@@ -17,7 +17,7 @@ const createStore = () => {
 
 		changeRaceActiveStatus: function (race) {
 			race.active = !race.active
-		},
+		}
     },
 
 	actions: {
