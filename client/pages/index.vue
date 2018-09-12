@@ -10,12 +10,21 @@
 
 		<label>Player Count: </label>
 		<select v-model='player_count'>
-			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4">4</option>
 			<option value="5">5</option>
 			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</select>
+
+		<label>Choices per Player:</label>
+		<select v-model='races_per_player'>
+			<option
+			v-for='number in race_count_options_per_player' :key='number'
+			:option='number'
+			>{{ number }}</option>
 		</select>
 
 		<div
@@ -39,7 +48,9 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
 	data: function () {
 		return {
-			player_count: 6
+			player_count: 6,
+			races_per_player: 2,
+			race_count_options_per_player: 2
 		}
 	},
 
@@ -53,6 +64,20 @@ export default {
 		...mapActions([
 			'toggleRaceActiveStatus'
 		])
+	},
+
+	watch: {
+		player_count: function (value) {
+			// Update number of race options per player
+			this.race_count_options_per_player = Math.floor(this.races.length / value)
+
+			// Update choices per player if nesseary
+			let max = Math.max(this.race_count_options_per_player)
+
+			if (max < this.races_per_player) {
+				this.races_per_player = max
+			}
+		}
 	}
 }
 </script>
