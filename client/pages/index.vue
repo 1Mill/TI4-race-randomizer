@@ -8,24 +8,25 @@
 			<li>Deal out races</li>
 		</ol>
 
-		<label>Player Count: </label>
-		<select v-model='player_count'>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-		</select>
+		<label>Player Count: </label> <span>{{ player_count }}</span>
+		<label
+		v-for='number in player_count_options' :key='number'
+		@click='updatePlayerCount(number)'
+		>
+			<input type='radio' name='player_count' :value='number' :checked='number === player_count'/>{{ number }}
+		</label>
 
-		<label>Choices per Player:</label>
-		<select v-model='races_per_player'>
-			<option
-			v-for='number in race_count_options_per_player' :key='number'
-			:option='number'
-			>{{ number }}</option>
-		</select>
+		<br /><br />
+
+		<label>Races per Player: </label> <span>{{ races_per_player }}</span>
+		<label
+		v-for='number in races_per_player_options' :key='number+100'
+		@click='updateRaceDistribution(number)'
+		>
+			<input type='radio' name='races_per_player' :value='number' :checked='number === races_per_player'/>{{ number }}
+		</label>
+
+		<br /><br />
 
 		<div
 		v-for='race in races' :key='race.name'
@@ -43,41 +44,25 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
-	data: function () {
-		return {
-			player_count: 6,
-			races_per_player: 2,
-			race_count_options_per_player: 2
-		}
-	},
-
 	computed: {
-		...mapGetters([
-			'races'
+		...mapState([
+			'races',
+			'player_count',
+			'player_count_options',
+			'races_per_player',
+			'races_per_player_options'
 		])
 	},
 
 	methods: {
 		...mapActions([
-			'toggleRaceActiveStatus'
+			'toggleRaceActiveStatus',
+			'updatePlayerCount',
+			'updateRaceDistribution'
 		])
-	},
-
-	watch: {
-		player_count: function (value) {
-			// Update number of race options per player
-			this.race_count_options_per_player = Math.floor(this.races.length / value)
-
-			// Update choices per player if nesseary
-			let max = Math.max(this.race_count_options_per_player)
-
-			if (max < this.races_per_player) {
-				this.races_per_player = max
-			}
-		}
 	}
 }
 </script>
