@@ -108,11 +108,25 @@ return new Vuex.Store({
 		},
 
 		generateRacesForPlayers: function ({ state }) {
-			const active_races = state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
 			const per_player = state.races_per_player
 			const players = state.players
 
-			players.forEach(player => player.races = _.sampleSize(active_races, per_player))
+			// Filter only active races
+			let active_races = state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
+
+			// Randomly shuffle array
+			active_races = _.shuffle(active_races)
+
+			// Split races into n partisions (of equal size ideally)
+			active_races = _.chunk(active_races, per_player)
+
+			// Remove last partision, as it it has unequal size
+			active_races.pop()
+
+			// console.log(active_races)
+			// console.log(_.sampleSize(active_races, players.length))
+
+			players.forEach((player, index) => player.races = active_races[index])
 		}
 	},
 

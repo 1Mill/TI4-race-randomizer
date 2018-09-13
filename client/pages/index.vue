@@ -50,7 +50,11 @@
 
 		<a @click='generateRacesForPlayers'>GENERATE</a>
 		<br />
-		{{ players }}
+		<div
+		v-for='player in players' :key='player.name'
+		>
+			<p>{{ player.name }}: {{ player.races }}</p>
+		</div>
 	</div>
 </template>
 
