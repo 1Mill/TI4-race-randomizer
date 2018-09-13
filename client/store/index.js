@@ -73,11 +73,19 @@ return new Vuex.Store({
 			}
 		},
 
-		toggleRaceActiveStatus ({ commit }, race) {
+		toggleRaceActiveStatus ({ state, commit }, race) {
 			if (race.active === true) {
 				commit('SET_RACE_ACTIVE_FALSE', race)
 			} else {
 				commit('SET_RACE_ACTIVE_TRUE', race)
+			}
+
+			const number_of_active_races = state.races.filter(race => race.active == true).length
+			const real_choices = Math.floor(number_of_active_races / state.player_count)
+
+			if (real_choices < state.races_per_player_options) {
+				commit('UPDATE_RACES_PER_PLAYER', Math.max(1, real_choices))
+				commit('UPDATE_RACES_PER_PLAYER_OPTIONS')
 			}
 		},
 
