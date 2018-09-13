@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import Vue from 'vue'
 
 const createStore = () => {
 return new Vuex.Store({
@@ -27,7 +28,7 @@ return new Vuex.Store({
 		},
 
 		CREATE_ACTIVE_ATTRIBUTE_ON_RACES: function (state) {
-			state.races.forEach(function(e) { e.active = true })
+			state.races.forEach(race => Vue.set(race, 'active', true))
 		},
 
 		CREATE_PLAYER: function (state, name) {
