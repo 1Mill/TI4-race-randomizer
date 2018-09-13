@@ -59,7 +59,7 @@ return new Vuex.Store({
 		async nuxtServerInit ({ state, commit }) {
 			// Init races to store
 			const data = await this.$axios.$get(`/races`)
-			commit('SET_STORE_RACES', data)
+			commit('SET_RACES', data)
 
 			// Add attribute attribute to races
 			commit('INIT_RACE_ACTIVE_ATTRIBUTE')
