@@ -45,6 +45,12 @@
 				</input>
 			</label>
 		</div>
+
+		<br /><br />
+
+		<a @click='generateRacesForPlayers'>GENERATE</a>
+		<br />
+		{{ players }}
 	</div>
 </template>
 
@@ -61,6 +67,7 @@ export default {
 	computed: {
 		...mapState([
 			'races',
+			'players',
 			'player_count',
 			'player_count_options',
 			'races_per_player',
@@ -72,7 +79,8 @@ export default {
 		...mapActions([
 			'toggleRaceActiveStatus',
 			'updatePlayerCount',
-			'updateRaceDistribution'
+			'updateRaceDistribution',
+			'generateRacesForPlayers'
 		])
 	}
 }

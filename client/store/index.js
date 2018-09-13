@@ -4,6 +4,7 @@ const createStore = () => {
 return new Vuex.Store({
 	state: {
 		races: [],
+		players: [],
 
 		player_count: 6,
 		player_count_options: [2, 3, 4, 5, 6, 7, 8],
@@ -29,6 +30,19 @@ return new Vuex.Store({
 			state.races.forEach(function(e) { e.active = true })
 		},
 
+		CREATE_PLAYER: function (state, name) {
+			state.players.push(
+				{
+					name: name,
+					races: []
+				}
+			)
+		},
+
+		DELETE_PLAYER: function (state) {
+			state.players.pop()
+		},
+
 		UPDATE_PLAYER_COUNT: function (state, value) {
 			state.player_count = value
 		},
@@ -46,10 +60,16 @@ return new Vuex.Store({
 	},
 
 	actions: {
-		async nuxtServerInit ({ commit }) {
+		async nuxtServerInit ({ state, commit }) {
+			// Init races
 			const data = await this.$axios.$get(`/races`)
 			commit('SET_STORE_RACES', data)
 			commit('CREATE_ACTIVE_ATTRIBUTE_ON_RACES')
+
+			// Init players
+			for(let i = 1; i <= state.player_count; i++) {
+				commit('CREATE_PLAYER', "Player " + i)
+			}
 		},
 
 		toggleRaceActiveStatus ({ commit }, race) {
@@ -61,6 +81,16 @@ return new Vuex.Store({
 		},
 
 		updatePlayerCount: function ({ state, commit }, value) {
+			// Delete players if value is lesser
+			for(let i = 0; i < (state.player_count - value); i++) {
+				commit('DELETE_PLAYER')
+			}
+
+			// Add players if value is greater
+			for(let i = 0; i < (value - state.player_count); i++) {
+				commit('CREATE_PLAYER', "Player " + (state.player_count + 1 + i))
+			}
+
 			// Update player ocunt
 			commit('UPDATE_PLAYER_COUNT', value)
 
@@ -75,13 +105,18 @@ return new Vuex.Store({
 
 		updateRaceDistribution: function ({ commit }, value) {
 			commit('UPDATE_RACES_PER_PLAYER', value)
+		},
+
+		generateRacesForPlayers: function ({ state }) {
+			const active_races = state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
+			const per_player = state.races_per_player
+			const players = state.players
+
+			players.forEach(player => player.races = _.sampleSize(active_races, per_player))
 		}
 	},
 
 	getters: {
-		active_races: function (state) {
-			return state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
-		}
 	}
 })
 }
