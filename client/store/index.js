@@ -14,11 +14,11 @@ return new Vuex.Store({
 	},
 
 	mutations: {
-		SET_RACE_ACTIVE_FALSE: function (race) {
+		SET_RACE_ACTIVE_FALSE: function (state, race) {
 			race.active = false
 		},
 
-		SET_RACE_ACTIVE_TRUE: function (race) {
+		SET_RACE_ACTIVE_TRUE: function (state, race) {
 			race.active = true
 		},
 
