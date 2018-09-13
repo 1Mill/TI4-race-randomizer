@@ -46,12 +46,12 @@ return new Vuex.Store({
 
 		// Update race.active to FALSE
 		PUT_RACE_ACTIVE_TO_FALSE: function (state, race) {
-			race.active = false
+			Vue.set(race, 'active', false)
 		},
 
 		// Update race.active to TRUE
 		PUT_RACE_ACTIVE_TO_TRUE: function (state, race) {
-			race.active = true
+			Vue.set(race, 'active', true)
 		}
 	},
 
@@ -76,6 +76,15 @@ return new Vuex.Store({
 
 		removePlayer: function ({ commit }) {
 			commit('DELETE_PLAYER')
+		},
+
+		toggleRace: function ({ commit }, race) {
+			if (race.active === true) {
+				// Turn false
+				commit('PUT_RACE_ACTIVE_TO_FALSE', race)
+			} else {
+				commit('PUT_RACE_ACTIVE_TO_TRUE', race)
+			}
 		}
 	},
 

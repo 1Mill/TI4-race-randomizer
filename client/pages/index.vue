@@ -20,6 +20,18 @@
 		</div>
 
 		<p>Player Count: {{ playerCount }}</p>
+
+		<div>
+			<label
+			v-for='race in races' :key='race.name'
+			@click='toggleRace(race)'
+			>
+				<input type='checkbox' :checked='race.active' />
+				{{ race.name }} {{ race.active }}
+			</label>
+		</div>
+
+		<p>Race Count: {{ races.length }}</p>
 	</div>
 </template>
 
@@ -40,6 +52,12 @@ export default {
 			}
 		},
 
+		races: {
+			get () {
+				return this.$store.state.races
+			}
+		},
+
 		...mapGetters ([
 			'playerCount'
 		])
@@ -48,7 +66,8 @@ export default {
 	methods: {
 		...mapActions([
 			'addPlayer',
-			'removePlayer'
+			'removePlayer',
+			'toggleRace'
 		])
 	}
 }
