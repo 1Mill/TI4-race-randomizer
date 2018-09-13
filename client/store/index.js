@@ -122,7 +122,9 @@ return new Vuex.Store({
 			active_races = _.chunk(active_races, per_player)
 
 			// Remove last partision, as it it has unequal size
-			active_races.pop()
+			if (active_races.length > players.length) {
+				active_races.pop()
+			}
 
 			// console.log(active_races)
 			// console.log(_.sampleSize(active_races, players.length))
