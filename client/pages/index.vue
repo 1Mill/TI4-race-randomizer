@@ -38,12 +38,15 @@
 			v-for='race in races' :key='race.name'
 			style='display: block;'
 			>
-				<input type='checkbox' name='races' :checked='race.active' @click='toggleRace(race)'/>
+				<input
+				type='checkbox' name='races' :checked='race.active'
+				@click='toggleRace(race)'
+				/>
 				{{ race.name }}
 			</label>
 		</fieldset>
 
-		<p>Race Count: {{ races.length }}; Active Races: {{ activeRaces.length }}</p>
+		<p>Select <b>{{ numberOfAdditionalRacesNeeded }}</b> additional races (selected: {{ activeRaces.length }}; min: {{ minNumberOfRaces }})</p>
 
 		<div>
 			Races per Player:
@@ -61,7 +64,7 @@
 
 		<p>Races per Player: {{ races_per_player }}</p>
 
-		<button @click='generatePlayerRaces'>GENERATE</button>
+		<button @click='generatePlayerRaces' :disabled='numberOfAdditionalRacesNeeded !== 0'>GENERATE</button>
 	</div>
 </template>
 
@@ -102,7 +105,9 @@ export default {
 
 		...mapGetters ([
 			'playerCount',
-			'activeRaces'
+			'activeRaces',
+			'minNumberOfRaces',
+			'numberOfAdditionalRacesNeeded'
 		])
 	},
 

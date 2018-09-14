@@ -148,6 +148,14 @@ return new Vuex.Store({
 
 		activeRaces: function (state) {
 			return state.races.filter(race => race.active === true)
+		},
+
+		minNumberOfRaces: function (state) {
+			return state.races_per_player * state.players.length
+		},
+
+		numberOfAdditionalRacesNeeded: function (state, getters) {
+			return Math.max(0, getters.minNumberOfRaces - getters.activeRaces.length)
 		}
 	}
 })
