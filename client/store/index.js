@@ -133,6 +133,10 @@ return new Vuex.Store({
 
 			// Distribute partitions to
 			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
+
+			// Add names to players
+			const names = _.split(state.player_names, ';')
+			players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
 		},
 
 		updatePlayerNames: function ({ commit }, string) {
