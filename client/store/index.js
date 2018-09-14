@@ -118,6 +118,8 @@ return new Vuex.Store({
 		generatePlayerRaces: function ({ state, commit }) {
 			const races_per_player = state.races_per_player
 			const players = state.players
+
+			// Get races such that race.active === true
 			let races = state.races.filter(race => race.active === true).map(race => race.name)
 
 			// Shuffle races
