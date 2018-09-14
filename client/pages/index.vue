@@ -9,8 +9,8 @@
 		</ol>
 
 		<div>
-			<a @click='addPlayer'>ADD PLAYER</a>
-			<a @click='removePlayer'>REMOVE PLAYER</a>
+			<button @click='addPlayer'>ADD PLAYER</button>
+			<button @click='removePlayer'>REMOVE PLAYER</button>
 		</div>
 
 		<div
@@ -22,8 +22,8 @@
 		<p>Player Count: {{ playerCount }}</p>
 
 		<div>
-			<a @click='checkAllRaces(true)'>CHECK ALL</a>
-			<a @click='checkAllRaces(false)'>UNCHECK ALL</a>
+			<button @click='checkAllRaces(true)'>CHECK ALL</button>
+			<button @click='checkAllRaces(false)'>UNCHECK ALL</button>
 		</div>
 
 		<div>
