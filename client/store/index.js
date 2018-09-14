@@ -75,8 +75,14 @@ return new Vuex.Store({
 			}
 		},
 
-		addPlayer: function ({ commit }) {
+		addPlayer: function ({ state, commit }) {
 			commit('CREATE_PLAYER')
+
+			// Update races_per_player options
+			const max = Math.floor(state.races.length/state.players.length)
+			if (max < state.races_per_player) {
+				commit('PUT_RACES_PER_PLAYER', max)
+			}
 		},
 
 		removePlayer: function ({ commit }) {
