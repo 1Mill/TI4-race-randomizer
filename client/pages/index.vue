@@ -43,7 +43,7 @@
 			v-model='races_per_player'
 			>
 				<option
-				v-for='i in (Math.floor(races.length/players.length))' :key='i'
+				v-for='i in Math.floor(races.length/players.length)' :key='i'
 				:value='i' :selected='i == races_per_player'
 				>
 					{{ i }}
