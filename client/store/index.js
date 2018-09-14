@@ -108,6 +108,26 @@ return new Vuex.Store({
 
 		updateRacesPerPlayer: function ({ commit }, value) {
 			commit('PUT_RACES_PER_PLAYER', value)
+		},
+
+		generatePlayerRaces: function ({ state, commit }) {
+			const races_per_player = state.races_per_player
+			const players = state.players
+			let races = state.races.filter(race => race.active === true).map(race => race.name)
+
+			// Shuffle races
+			races = _.shuffle(races)
+
+			// Split races into partitions of size less than or equal to n (where n = races_per_player)
+			races = _.chunk(races, races_per_player)
+
+			// Remove the last partitions as it most likely has unequal size (as 17 is a prime number)
+			if (races_per_player > players.length) {
+				races.pop()
+			}
+
+			// Distribute partitions to
+			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
 		}
 	},
 

@@ -52,6 +52,8 @@
 		</div>
 
 		<p>Races per Player: {{ races_per_player }}</p>
+
+		<button @click='generatePlayerRaces'>GENERATE</button>
 	</div>
 </template>
 
@@ -99,7 +101,8 @@ export default {
 			'removePlayer',
 			'toggleRace',
 			'checkAllRaces',
-			'updateRacesPerPlayer'
+			'updateRacesPerPlayer',
+			'generatePlayerRaces'
 		])
 	}
 }
