@@ -4,144 +4,154 @@ import Vue from 'vue'
 const createStore = () => {
 return new Vuex.Store({
 	state: {
-		races: [],
-		players: [],
+		races: [], // Race information (length)
+		players: [], // Player information (length, name, associated race names)
+		player_names: '',
 
-		player_count: 6,
-		player_count_options: [2, 3, 4, 5, 6, 7, 8],
-
-		races_per_player: 2,
-		races_per_player_options: 2
+		races_per_player: 2
 	},
 
 	mutations: {
-		SET_RACE_ACTIVE_FALSE: function (state, race) {
-			race.active = false
-		},
-
-		SET_RACE_ACTIVE_TRUE: function (state, race) {
-			race.active = true
-		},
-
-		SET_STORE_RACES: function (state, races) {
-			state.races = races
-		},
-
-		CREATE_ACTIVE_ATTRIBUTE_ON_RACES: function (state) {
+		// Add race.active attribute to all races
+		INIT_RACE_ACTIVE_ATTRIBUTE: function (state) {
 			state.races.forEach(race => Vue.set(race, 'active', true))
 		},
 
-		CREATE_PLAYER: function (state, name) {
-			state.players.push(
-				{
-					name: name,
-					races: []
-				}
-			)
+		// Set store.races array
+		SET_RACES: function (state, races) {
+			state.races = races
 		},
 
+		// Add player
+		CREATE_PLAYER: function (state, optional_name) {
+			const index = Math.max(_.lastIndexOf(state.players), 0) + 1
+			const name = optional_name || 'unknown'
+
+			if (state.players.length < 8) {
+				state.players.push(
+					{
+						id: 'Player ' + index,
+						name: name,
+						races: []
+					}
+				)
+			}
+		},
+
+		// Remove last player from array
 		DELETE_PLAYER: function (state) {
-			state.players.pop()
+			if (state.players.length > 2) {
+				state.players.pop()
+			}
 		},
 
-		UPDATE_PLAYER_COUNT: function (state, value) {
-			state.player_count = value
+		// Update race.active to FALSE
+		PUT_RACE_ACTIVE_TO_FALSE: function (state, race) {
+			Vue.set(race, 'active', false)
 		},
 
-		UPDATE_RACES_PER_PLAYER: function (state, value) {
+		// Update race.active to TRUE
+		PUT_RACE_ACTIVE_TO_TRUE: function (state, race) {
+			Vue.set(race, 'active', true)
+		},
+
+		// Update store.races_per_player
+		PUT_RACES_PER_PLAYER: function (state, value) {
 			state.races_per_player = value
 		},
 
-		UPDATE_RACES_PER_PLAYER_OPTIONS: function (state) {
-			const players = state.player_count
-			const races = state.races.length
-
-			state.races_per_player_options = Math.floor(races / players)
+		PUT_PLAYER_NAMES: function (state, string) {
+			state.player_names = string
 		}
 	},
 
 	actions: {
 		async nuxtServerInit ({ state, commit }) {
-			// Init races
+			// Init races to store
 			const data = await this.$axios.$get(`/races`)
-			commit('SET_STORE_RACES', data)
-			commit('CREATE_ACTIVE_ATTRIBUTE_ON_RACES')
+			commit('SET_RACES', data)
 
-			// Init players
-			for(let i = 1; i <= state.player_count; i++) {
-				commit('CREATE_PLAYER', "Player " + i)
+			// Add attribute attribute to races
+			commit('INIT_RACE_ACTIVE_ATTRIBUTE')
+
+			// Init 6 players (by default)
+			for(let i = 1; i <= 6; i++) {
+				commit('CREATE_PLAYER')
 			}
 		},
 
-		toggleRaceActiveStatus ({ state, commit }, race) {
+		addPlayer: function ({ state, commit }) {
+			commit('CREATE_PLAYER')
+
+			// Update races_per_player options
+			const max = Math.floor(state.races.length/state.players.length)
+			if (max < state.races_per_player) {
+				commit('PUT_RACES_PER_PLAYER', max)
+			}
+		},
+
+		removePlayer: function ({ commit }) {
+			commit('DELETE_PLAYER')
+		},
+
+		toggleRace: function ({ commit }, race) {
 			if (race.active === true) {
-				commit('SET_RACE_ACTIVE_FALSE', race)
+				// Turn false
+				commit('PUT_RACE_ACTIVE_TO_FALSE', race)
 			} else {
-				commit('SET_RACE_ACTIVE_TRUE', race)
-			}
-
-			const number_of_active_races = state.races.filter(race => race.active == true).length
-			const real_choices = Math.floor(number_of_active_races / state.player_count)
-
-			if (real_choices < state.races_per_player_options) {
-				commit('UPDATE_RACES_PER_PLAYER', Math.max(1, real_choices))
-				commit('UPDATE_RACES_PER_PLAYER_OPTIONS')
+				commit('PUT_RACE_ACTIVE_TO_TRUE', race)
 			}
 		},
 
-		updatePlayerCount: function ({ state, commit }, value) {
-			// Delete players if value is lesser
-			for(let i = 0; i < (state.player_count - value); i++) {
-				commit('DELETE_PLAYER')
-			}
-
-			// Add players if value is greater
-			for(let i = 0; i < (value - state.player_count); i++) {
-				commit('CREATE_PLAYER', "Player " + (state.player_count + 1 + i))
-			}
-
-			// Update player ocunt
-			commit('UPDATE_PLAYER_COUNT', value)
-
-			// Update races per player options
-			commit('UPDATE_RACES_PER_PLAYER_OPTIONS')
-
-			// Update races per player
-			if (state.races_per_player_options < state.races_per_player) {
-				commit('UPDATE_RACES_PER_PLAYER', state.races_per_player_options)
+		checkAllRaces: function ({ state, commit }, boolean) {
+			if (boolean === true) {
+				state.races.forEach(race => commit('PUT_RACE_ACTIVE_TO_TRUE', race))
+			} else {
+				state.races.forEach(race => commit('PUT_RACE_ACTIVE_TO_FALSE', race))
 			}
 		},
 
-		updateRaceDistribution: function ({ commit }, value) {
-			commit('UPDATE_RACES_PER_PLAYER', value)
+		updateRacesPerPlayer: function ({ commit }, value) {
+			commit('PUT_RACES_PER_PLAYER', value)
 		},
 
-		generateRacesForPlayers: function ({ state }) {
-			const per_player = state.races_per_player
+		generatePlayerRaces: function ({ state, commit }) {
+			const races_per_player = state.races_per_player
 			const players = state.players
 
-			// Filter only active races
-			let active_races = state.active_races = state.races.filter(race => race.active == true).map(race => race.name)
+			// Get races such that race.active === true
+			let races = state.races.filter(race => race.active === true).map(race => race.name)
 
-			// Randomly shuffle array
-			active_races = _.shuffle(active_races)
+			// Shuffle races
+			races = _.shuffle(races)
 
-			// Split races into n partisions (of equal size ideally)
-			active_races = _.chunk(active_races, per_player)
+			// Split races into partitions of size less than or equal to n (where n = races_per_player)
+			races = _.chunk(races, races_per_player)
 
-			// Remove last partision, as it it has unequal size
-			if (active_races.length > players.length) {
-				active_races.pop()
-			}
+			// Remove the last partitions as it most likely has unequal size (as 17 is a prime number)
+			races.pop()
 
-			// console.log(active_races)
-			// console.log(_.sampleSize(active_races, players.length))
+			// Distribute partitions to players
+			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
 
-			players.forEach((player, index) => player.races = active_races[index])
+			// Add names to players
+			const names = _.split(state.player_names, ';')
+			players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
+		},
+
+		updatePlayerNames: function ({ commit }, string) {
+			commit('PUT_PLAYER_NAMES', string)
 		}
 	},
 
 	getters: {
+		playerCount: function (state) {
+			return state.players.length
+		},
+
+		activeRaces: function (state) {
+			return state.races.filter(race => race.active === true)
+		}
 	}
 })
 }

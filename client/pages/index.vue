@@ -8,83 +8,113 @@
 			<li>Deal out races</li>
 		</ol>
 
-		<label>Player Count: </label> <span>{{ player_count }}</span>
-		<label
-		v-for='number in player_count_options' :key='number'
-		@click='updatePlayerCount(number)'
-		>
-			<input type='radio' name='player_count' :value='number' :checked='number === player_count'/>{{ number }}
-		</label>
+		<div>
+			<label>Player names (seperated by ; or ,):</label>
+			<textarea v-model='player_names' placeholder='Bob; Joe; June' />
+		</div>
 
-		<br /><br />
+		<p>Player Names String: {{ player_names }}</p>
 
-		<label>Player Names (seperated by ;)</label>
-		<textarea v-model='player_names' placeholder='Dan; Bob; June; May'/>
-
-		<br /><br />
-
-		<label>Races per Player: </label> <span>{{ races_per_player }}</span>
-		<label
-		v-for='number in races_per_player_options' :key='number+100'
-		@click='updateRaceDistribution(number)'
-		>
-			<input type='radio' name='races_per_player' :value='number' :checked='number === races_per_player'/>{{ number }}
-		</label>
-
-		<br /><br />
+		<div>
+			<button @click='addPlayer'>ADD PLAYER</button>
+			<button @click='removePlayer'>REMOVE PLAYER</button>
+		</div>
 
 		<div
-		v-for='race in races' :key='race.name'
+		v-for='player in players' :key='player.id'
 		>
-			<label>
-				<input
-				type='checkbox' :checked='race.active'
-				@click='toggleRaceActiveStatus(race)'
-				>
-					{{ race.name }}
-				</input>
+			{{ player }}
+		</div>
+
+		<p>Player Count: {{ playerCount }}</p>
+
+		<div>
+			<button @click='checkAllRaces(true)'>CHECK ALL</button>
+			<button @click='checkAllRaces(false)'>UNCHECK ALL</button>
+		</div>
+
+		<fieldset>
+			<label
+			v-for='race in races' :key='race.name'
+			style='display: block;'
+			>
+				<input type='checkbox' name='races' :checked='race.active' @click='toggleRace(race)'/>
+				{{ race.name }}
 			</label>
+		</fieldset>
+
+		<p>Race Count: {{ races.length }}; Active Races: {{ activeRaces.length }}</p>
+
+		<div>
+			Races per Player:
+			<select
+			v-model='races_per_player'
+			>
+				<option
+				v-for='i in Math.floor(races.length/players.length)' :key='i'
+				:value='i' :selected='i == races_per_player'
+				>
+					{{ i }}
+				</option>
+			</select>
 		</div>
 
-		<br /><br />
+		<p>Races per Player: {{ races_per_player }}</p>
 
-		<a @click='generateRacesForPlayers'>GENERATE</a>
-		<br />
-		<div
-		v-for='player in players' :key='player.name'
-		>
-			<p>{{ player.name }}: {{ player.races }}</p>
-		</div>
+		<button @click='generatePlayerRaces'>GENERATE</button>
 	</div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-	data: function () {
-		return {
-			player_names: ''
-		}
-	},
-
 	computed: {
-		...mapState([
-			'races',
-			'players',
-			'player_count',
-			'player_count_options',
-			'races_per_player',
-			'races_per_player_options'
+		players: {
+			get () {
+				return this.$store.state.players
+			}
+		},
+
+		races: {
+			get () {
+				return this.$store.state.races
+			}
+		},
+
+		races_per_player: {
+			get () {
+				return this.$store.state.races_per_player
+			},
+			set (value) {
+				this.updateRacesPerPlayer(value)
+			}
+		},
+
+		player_names: {
+			get () {
+				return this.$store.state.player_names
+			},
+			set (value) {
+				this.updatePlayerNames(value)
+			}
+		},
+
+		...mapGetters ([
+			'playerCount',
+			'activeRaces'
 		])
 	},
 
 	methods: {
 		...mapActions([
-			'toggleRaceActiveStatus',
-			'updatePlayerCount',
-			'updateRaceDistribution',
-			'generateRacesForPlayers'
+			'addPlayer',
+			'removePlayer',
+			'toggleRace',
+			'checkAllRaces',
+			'updateRacesPerPlayer',
+			'generatePlayerRaces',
+			'updatePlayerNames'
 		])
 	}
 }
