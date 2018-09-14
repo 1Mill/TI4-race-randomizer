@@ -65,7 +65,7 @@
 		<p
 		v-for='player in players' :key='player.id'
 		>
-			{{ player.id }}({{ player.name }}):
+			{{ player.id }} ({{ player.name }}):
 			<span
 			v-for='(race, index) in player.races'
 			>
