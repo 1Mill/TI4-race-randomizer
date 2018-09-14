@@ -24,9 +24,8 @@
 		<div>
 			<label
 			v-for='race in races' :key='race.name'
-			@click='toggleRace(race)'
 			>
-				<input type='checkbox' :checked='race.active' />
+				<input type='checkbox' :checked='race.active' @click='toggleRace(race)'/>
 				{{ race.name }} {{ race.active }}
 			</label>
 		</div>
