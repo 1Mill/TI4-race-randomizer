@@ -29,9 +29,10 @@
 		<div>
 			<label
 			v-for='race in races' :key='race.name'
+			style='display: block;'
 			>
 				<input type='checkbox' :checked='race.active' @click='toggleRace(race)'/>
-				{{ race.name }} {{ race.active }}
+				{{ race.name }}
 			</label>
 		</div>
 
