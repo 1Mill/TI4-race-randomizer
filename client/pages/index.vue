@@ -76,22 +76,17 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
 	computed: {
-		players: {
-			get () {
-				return this.$store.state.players
-			}
-		},
+		// Traditional Store States
+		...mapState ([
+			'players',
+			'races'
+		]),
 
-		races: {
-			get () {
-				return this.$store.state.races
-			}
-		},
-
+		// Store States that need to be updated using v-model
 		races_per_player: {
 			get () {
 				return this.$store.state.races_per_player
@@ -110,6 +105,7 @@ export default {
 			}
 		},
 
+		// Getters for non-trivial things
 		...mapGetters ([
 			'playerCount',
 			'activeRaces',
