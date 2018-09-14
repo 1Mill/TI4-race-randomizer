@@ -33,15 +33,15 @@
 			<button @click='checkAllRaces(false)'>UNCHECK ALL</button>
 		</div>
 
-		<div>
+		<fieldset>
 			<label
 			v-for='race in races' :key='race.name'
 			style='display: block;'
 			>
-				<input type='checkbox' :checked='race.active' @click='toggleRace(race)'/>
+				<input type='checkbox' name='races' :checked='race.active' @click='toggleRace(race)'/>
 				{{ race.name }}
 			</label>
-		</div>
+		</fieldset>
 
 		<p>Race Count: {{ races.length }}; Active Races: {{ activeRaces.length }}</p>
 
