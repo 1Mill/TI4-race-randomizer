@@ -36,6 +36,22 @@
 		</div>
 
 		<p>Race Count: {{ races.length }}; Active Races: {{ activeRaces.length }}</p>
+
+		<div>
+			Races per Player:
+			<select
+			v-model='races_per_player'
+			>
+				<option
+				v-for='i in (Math.floor(races.length/players.length))' :key='i'
+				:value='i' :selected='i == races_per_player'
+				>
+					{{ i }}
+				</option>
+			</select>
+		</div>
+
+		<p>Races per Player: {{ races_per_player }}</p>
 	</div>
 </template>
 
@@ -62,6 +78,15 @@ export default {
 			}
 		},
 
+		races_per_player: {
+			get () {
+				return this.$store.state.races_per_player
+			},
+			set (value) {
+				this.updateRacesPerPlayer(value)
+			}
+		},
+
 		...mapGetters ([
 			'playerCount',
 			'activeRaces'
@@ -73,7 +98,8 @@ export default {
 			'addPlayer',
 			'removePlayer',
 			'toggleRace',
-			'checkAllRaces'
+			'checkAllRaces',
+			'updateRacesPerPlayer'
 		])
 	}
 }

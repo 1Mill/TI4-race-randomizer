@@ -5,7 +5,9 @@ const createStore = () => {
 return new Vuex.Store({
 	state: {
 		races: [], // Race information (length)
-		players: [] // Player information (length, name, associated race names)
+		players: [], // Player information (length, name, associated race names)
+
+		races_per_player: 2
 	},
 
 	mutations: {
@@ -50,6 +52,11 @@ return new Vuex.Store({
 		// Update race.active to TRUE
 		PUT_RACE_ACTIVE_TO_TRUE: function (state, race) {
 			Vue.set(race, 'active', true)
+		},
+
+		// Update store.races_per_player
+		PUT_RACES_PER_PLAYER: function (state, value) {
+			state.races_per_player = value
 		}
 	},
 
@@ -91,6 +98,10 @@ return new Vuex.Store({
 			} else {
 				state.races.forEach(race => commit('PUT_RACE_ACTIVE_TO_FALSE', race))
 			}
+		},
+
+		updateRacesPerPlayer: function ({ commit }, value) {
+			commit('PUT_RACES_PER_PLAYER', value)
 		}
 	},
 
