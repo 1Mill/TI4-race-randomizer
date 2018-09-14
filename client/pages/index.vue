@@ -20,13 +20,9 @@
 			<button @click='removePlayer'>REMOVE PLAYER</button>
 		</div>
 
-		<div
-		v-for='player in players' :key='player.id'
-		>
-			{{ player }}
-		</div>
-
-		<p>Player Count: {{ playerCount }}</p>
+		<p>
+			Number of Players: {{ playerCount }}
+		</p>
 
 		<div>
 			<button @click='checkAllRaces(true)'>CHECK ALL</button>
@@ -65,6 +61,17 @@
 		<p>Races per Player: {{ races_per_player }}</p>
 
 		<button @click='generatePlayerRaces' :disabled='numberOfAdditionalRacesNeeded !== 0'>GENERATE</button>
+
+		<p
+		v-for='player in players' :key='player.id'
+		>
+			{{ player.id }}({{ player.name }}):
+			<span
+			v-for='(race, index) in player.races'
+			>
+				({{ index + 1 }}) <b>{{ race }}</b>
+			</span>
+		</p>
 	</div>
 </template>
 
