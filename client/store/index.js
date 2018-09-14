@@ -124,6 +124,7 @@ return new Vuex.Store({
 		generatePlayerRaces: function ({ state, commit }) {
 			const races_per_player = state.races_per_player
 			const players = state.players
+			const speaker_option = state.speaker_option
 
 			// Get races such that race.active === true
 			let races = state.races.filter(race => race.active === true).map(race => race.name)
@@ -140,6 +141,11 @@ return new Vuex.Store({
 			// Add names to players
 			const names = _.split(state.player_names, ';')
 			players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
+
+			// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)
+			if (speaker_option == 2) {
+				_.sample(players).races.unshift('**SPEAKER**')
+			}
 		},
 
 		updatePlayerNames: function ({ commit }, string) {
