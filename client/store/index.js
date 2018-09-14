@@ -6,6 +6,7 @@ return new Vuex.Store({
 	state: {
 		races: [], // Race information (length)
 		players: [], // Player information (length, name, associated race names)
+		player_names: '',
 
 		races_per_player: 2
 	},
@@ -57,6 +58,10 @@ return new Vuex.Store({
 		// Update store.races_per_player
 		PUT_RACES_PER_PLAYER: function (state, value) {
 			state.races_per_player = value
+		},
+
+		PUT_PLAYER_NAMES: function (state, string) {
+			state.player_names = string
 		}
 	},
 
@@ -126,6 +131,10 @@ return new Vuex.Store({
 
 			// Distribute partitions to
 			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
+		},
+
+		updatePlayerNames: function ({ commit }, string) {
+			commit('PUT_PLAYER_NAMES', string)
 		}
 	},
 

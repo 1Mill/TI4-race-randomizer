@@ -9,6 +9,13 @@
 		</ol>
 
 		<div>
+			<label>Player names (seperated by ; or ,):</label>
+			<textarea v-model='player_names' placeholder='Bob; Joe; June' />
+		</div>
+
+		<p>Player Names String: {{ player_names }}</p>
+
+		<div>
 			<button @click='addPlayer'>ADD PLAYER</button>
 			<button @click='removePlayer'>REMOVE PLAYER</button>
 		</div>
@@ -62,12 +69,6 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-	data: function () {
-		return {
-			player_names: ''
-		}
-	},
-
 	computed: {
 		players: {
 			get () {
@@ -90,6 +91,15 @@ export default {
 			}
 		},
 
+		player_names: {
+			get () {
+				return this.$store.state.player_names
+			},
+			set (value) {
+				this.updatePlayerNames(value)
+			}
+		},
+
 		...mapGetters ([
 			'playerCount',
 			'activeRaces'
@@ -103,7 +113,8 @@ export default {
 			'toggleRace',
 			'checkAllRaces',
 			'updateRacesPerPlayer',
-			'generatePlayerRaces'
+			'generatePlayerRaces',
+			'updatePlayerNames'
 		])
 	}
 }
