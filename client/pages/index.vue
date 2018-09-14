@@ -22,6 +22,11 @@
 		<p>Player Count: {{ playerCount }}</p>
 
 		<div>
+			<a @click='checkAllRaces(true)'>CHECK ALL</a>
+			<a @click='checkAllRaces(false)'>UNCHECK ALL</a>
+		</div>
+
+		<div>
 			<label
 			v-for='race in races' :key='race.name'
 			>
@@ -30,7 +35,7 @@
 			</label>
 		</div>
 
-		<p>Race Count: {{ races.length }}</p>
+		<p>Race Count: {{ races.length }}; Active Races: {{ activeRaces.length }}</p>
 	</div>
 </template>
 
@@ -58,7 +63,8 @@ export default {
 		},
 
 		...mapGetters ([
-			'playerCount'
+			'playerCount',
+			'activeRaces'
 		])
 	},
 
@@ -66,7 +72,8 @@ export default {
 		...mapActions([
 			'addPlayer',
 			'removePlayer',
-			'toggleRace'
+			'toggleRace',
+			'checkAllRaces'
 		])
 	}
 }

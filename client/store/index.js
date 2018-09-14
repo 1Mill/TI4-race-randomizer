@@ -85,12 +85,24 @@ return new Vuex.Store({
 			} else {
 				commit('PUT_RACE_ACTIVE_TO_TRUE', race)
 			}
+		},
+
+		checkAllRaces: function ({ state, commit }, boolean) {
+			if (boolean === true) {
+				state.races.forEach(race => commit('PUT_RACE_ACTIVE_TO_TRUE', race))
+			} else {
+				state.races.forEach(race => commit('PUT_RACE_ACTIVE_TO_FALSE', race))
+			}
 		}
 	},
 
 	getters: {
 		playerCount: function (state) {
 			return state.players.length
+		},
+
+		activeRaces: function (state) {
+			return state.races.filter(race => race.active === true)
 		}
 	}
 })
