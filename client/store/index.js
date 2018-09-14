@@ -8,7 +8,9 @@ return new Vuex.Store({
 		players: [], // Player information (length, name, associated race names)
 		player_names: '',
 
-		races_per_player: 2
+		races_per_player: 2,
+
+		speaker_option: 1
 	},
 
 	mutations: {
@@ -62,6 +64,10 @@ return new Vuex.Store({
 
 		PUT_PLAYER_NAMES: function (state, string) {
 			state.player_names = string
+		},
+
+		PUT_SPEAKER_OPTION: function (state, value) {
+			state.speaker_option = value
 		}
 	},
 

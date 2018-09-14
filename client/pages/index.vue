@@ -60,6 +60,17 @@
 
 		<p>Races per Player: {{ races_per_player }}</p>
 
+		<div>
+			Speaker Option:
+			<select v-model='speaker_option'>
+				<option value = '1'>Don't distribute</option>
+				<option value = '2'>Randomly distribute</option>
+				<!-- <option value = '3' :disabled='races_per_player <= 1'>Randomly distribute with 1 fewer race choice</option> -->
+			</select>
+		</div>
+
+		<p>Speaker Option: {{ speaker_option }}</p>
+
 		<button @click='generatePlayerRaces' :disabled='numberOfAdditionalRacesNeeded !== 0'>GENERATE</button>
 
 		<p
@@ -102,6 +113,15 @@ export default {
 			},
 			set (value) {
 				this.updatePlayerNames(value)
+			}
+		},
+
+		speaker_option: {
+			get () {
+				return this.$store.state.speaker_option
+			},
+			set (value) {
+				this.$store.commit('PUT_SPEAKER_OPTION', value)
 			}
 		},
 
