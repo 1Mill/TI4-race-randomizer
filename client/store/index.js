@@ -5,9 +5,7 @@ const createStore = () => {
 return new Vuex.Store({
 	state: {
 		races: [], // Race information (length)
-		players: [], // Player information (length, name, associated race names)
-
-		player_number_options: _.range(2, 9) // Number of possible players (2 to 8)
+		players: [] // Player information (length, name, associated race names)
 	},
 
 	mutations: {
