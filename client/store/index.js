@@ -131,7 +131,7 @@ return new Vuex.Store({
 			// Remove the last partitions as it most likely has unequal size (as 17 is a prime number)
 			races.pop()
 
-			// Distribute partitions to
+			// Distribute partitions to players
 			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
 
 			// Add names to players
