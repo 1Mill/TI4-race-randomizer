@@ -122,9 +122,7 @@ return new Vuex.Store({
 			races = _.chunk(races, races_per_player)
 
 			// Remove the last partitions as it most likely has unequal size (as 17 is a prime number)
-			if (races_per_player > players.length) {
-				races.pop()
-			}
+			races.pop()
 
 			// Distribute partitions to
 			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
