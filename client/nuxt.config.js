@@ -29,6 +29,7 @@ module.exports = {
   */
   css: [
     'tachyons',
+    '~/assets/generic.extend-tachyons.css',
     '~/assets/generic.font.css'
   ],
 
