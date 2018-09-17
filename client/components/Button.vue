@@ -1,7 +1,7 @@
 <template>
 	<a
 	class='[ dib no-underline ]'
-	:class='getClassStyle'
+	:class='getStylingClasses'
 	>
 		<slot />
 	</a>
@@ -17,7 +17,7 @@ export default {
 	},
 
 	computed: {
-		getClassStyle: function () {
+		getStylingClasses: function () {
 			let class_style = ''
 
 			switch(this.styling) {
