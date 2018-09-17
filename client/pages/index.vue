@@ -16,8 +16,19 @@
 		<p>Player Names String: {{ player_names }}</p>
 
 		<div>
-			<button @click='addPlayer'>ADD PLAYER</button>
-			<button @click='removePlayer'>REMOVE PLAYER</button>
+			<Button
+			styling='d'
+			@click.native='addPlayer'
+			>
+				Add player
+			</Button>
+
+			<Button
+			styling='d'
+			@click.native='removePlayer'
+			>
+				Remove player
+			</Button>
 		</div>
 
 		<p>
@@ -25,8 +36,19 @@
 		</p>
 
 		<div>
-			<button @click='checkAllRaces(true)'>CHECK ALL</button>
-			<button @click='checkAllRaces(false)'>UNCHECK ALL</button>
+			<Button
+			styling='h'
+			@click.native='checkAllRaces(true)'
+			>
+				Check all
+			</Button>
+
+			<Button
+			styling='h'
+			@click.native='checkAllRaces(false)'
+			>
+				Uncheck all
+			</Button>
 		</div>
 
 		<fieldset>
