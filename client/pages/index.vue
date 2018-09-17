@@ -63,6 +63,7 @@
 				{{ race.name }}
 			</label>
 		</fieldset>
+		<p class='[ lh-copy f7 ]'><b>*</b> races are recommended for new players</p>
 
 		<p>Select <b>{{ numberOfAdditionalRacesNeeded }}</b> additional races (selected: {{ activeRaces.length }}; min: {{ minNumberOfRaces }})</p>
 
