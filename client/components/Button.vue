@@ -1,5 +1,6 @@
 <template>
 	<a
+	class='[ dib no-underline ]'
 	:class='getClassStyle'
 	>
 		<slot />
@@ -17,7 +18,7 @@ export default {
 
 	computed: {
 		getClassStyle: function () {
-			let class_style = 'dib br1'
+			let class_style = ''
 
 			switch(this.styling) {
 				// Champion
