@@ -1,6 +1,6 @@
 <template>
 	<a
-	class='[ dib no-underline br2 ]'
+	class='[ dib no-underline br2 pointer ]'
 	:class='getStylingClasses'
 	:style='disabled ? "cursor: not-allowed; opacity: 0.5;" : "" '
 	>
