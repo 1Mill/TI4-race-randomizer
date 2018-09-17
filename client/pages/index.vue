@@ -71,7 +71,13 @@
 
 		<p>Speaker Option: {{ speaker_option }}</p>
 
-		<button @click='generatePlayerRaces' :disabled='numberOfAdditionalRacesNeeded !== 0'>GENERATE</button>
+		<Button
+		styling='c'
+		@click.native='generatePlayerRaces'
+		:disabled='numberOfAdditionalRacesNeeded !== 0'
+		>
+			GENERATE
+		</Button>
 
 		<p
 		v-for='player in players' :key='player.id'
@@ -88,6 +94,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
+import Button from '~/components/Button'
 
 export default {
 	computed: {
@@ -144,6 +151,10 @@ export default {
 			'generatePlayerRaces',
 			'updatePlayerNames'
 		])
+	},
+
+	components: {
+		Button
 	}
 }
 </script>
