@@ -1,6 +1,6 @@
 <template>
 	<a
-	class='[ dib no-underline ]'
+	class='[ dib no-underline br2 ]'
 	:class='getStylingClasses'
 	>
 		<slot />
@@ -23,17 +23,17 @@ export default {
 			switch(this.styling) {
 				// Champion
 				case 'c':
-					class_style += '[ pv3 ph4 white bg-brand-first hover-bg-brand-first-dark _Button ]'
+					class_style += '[ pv3 ph4 white bg-brand-first hover-bg-brand-first-dark shadow-4 ]'
 					break
 
 				// Driver
 				case 'd':
-					class_style += '[ pv2 ph3 brand-first ba bw1 hover-brand-first-dark  ]'
+					class_style += '[ pv2 ph3 brand-first ba bw1 hover-brand-first-dark shadow-4 ]'
 					break
 
 				// Driver White
 				case 'dw':
-					class_style += '[ pv2 ph3 white ba bw1 hover-moon-gray ]'
+					class_style += '[ pv2 ph3 white ba bw1 hover-moon-gray shadow-4 ]'
 					break
 
 				// Helper
