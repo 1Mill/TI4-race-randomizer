@@ -2,6 +2,7 @@
 	<a
 	class='[ dib no-underline br2 ]'
 	:class='getStylingClasses'
+	:style='disabled ? "cursor: not-allowed; opacity: 0.5;" : "" '
 	>
 		<slot />
 	</a>
@@ -13,6 +14,10 @@ export default {
 		styling: {
 			required: true,
 			type: String
+		},
+
+		disabled: {
+			type: Boolean
 		}
 	},
 
