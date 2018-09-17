@@ -1,6 +1,6 @@
 <template>
 	<a
-	class='[ dib no-underline br2 pointer ]'
+	class='[ dib no-underline br2 pointer underline-hover ]'
 	:class='getStylingClasses'
 	:style='disabled ? "cursor: not-allowed; opacity: 0.5;" : "" '
 	>
@@ -43,12 +43,12 @@ export default {
 
 				// Helper
 				case 'h':
-					class_style += '[ pv2 ph3 brand-second hover-brand-second-dark underline-hover ]'
+					class_style += '[ pv2 ph3 brand-second hover-brand-second-dark ]'
 					break
 
 				// Helper white
 				case 'hw':
-					class_style += '[ pv2 ph3 moon-gray hover-silver underline-hover ]'
+					class_style += '[ pv2 ph3 moon-gray hover-silver ]'
 			}
 
 			return class_style
