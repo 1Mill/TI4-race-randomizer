@@ -121,30 +121,32 @@ return new Vuex.Store({
 			commit('PUT_RACES_PER_PLAYER', value)
 		},
 
-		generatePlayerRaces: function ({ state, commit }) {
+		generatePlayerRaces: function ({ state, commit, getters }) {
 			const races_per_player = state.races_per_player
 			const players = state.players
 			const speaker_option = state.speaker_option
 
-			// Get races such that race.active === true
-			let races = state.races.filter(race => race.active === true).map(race => race.name)
+			if (getters.numberOfAdditionalRacesNeeded === 0) {
+				// Get races such that race.active === true
+				let races = state.races.filter(race => race.active === true).map(race => race.name)
 
-			// Shuffle races
-			races = _.shuffle(races)
+				// Shuffle races
+				races = _.shuffle(races)
 
-			// Split races into partitions of size less than or equal to n (where n = races_per_player)
-			races = _.chunk(races, races_per_player)
+				// Split races into partitions of size less than or equal to n (where n = races_per_player)
+				races = _.chunk(races, races_per_player)
 
-			// Distribute partitions to players
-			players.forEach((player, index) => Vue.set(player, 'races', races[index]))
+				// Distribute partitions to players
+				players.forEach((player, index) => Vue.set(player, 'races', races[index]))
 
-			// Add names to players
-			const names = _.split(state.player_names, ';')
-			players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
+				// Add names to players
+				const names = _.split(state.player_names, ';')
+				players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
 
-			// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)
-			if (speaker_option == 2) {
-				_.sample(players).races.unshift('**SPEAKER**')
+				// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)
+				if (speaker_option == 2) {
+					_.sample(players).races.unshift('**SPEAKER**')
+				}
 			}
 		},
 
