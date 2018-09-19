@@ -1,93 +1,107 @@
 <template>
 	<div>
-		<ol>
-			<li>Determine the number of players and/or Enter names</li>
-			<li>Check the boxes for each race you want to play with</li>
-			<li>Number of Choices per player</li>
-			<li>Optional Speaker options</li>
-			<li>Deal out races</li>
-		</ol>
-
-		<div>
-			<label>Player names (seperated by ; or ,):</label>
-			<textarea v-model='player_names' placeholder='Bob; Joe; June' />
-		</div>
-
-		<p>Player Names String: {{ player_names }}</p>
-
-		<div>
-			<button @click='addPlayer'>ADD PLAYER</button>
-			<button @click='removePlayer'>REMOVE PLAYER</button>
-		</div>
-
-		<p>
-			Number of Players: {{ playerCount }}
-		</p>
-
-		<div>
-			<button @click='checkAllRaces(true)'>CHECK ALL</button>
-			<button @click='checkAllRaces(false)'>UNCHECK ALL</button>
-		</div>
-
-		<fieldset>
-			<label
-			v-for='race in races' :key='race.name'
-			style='display: block;'
-			>
-				<input
-				type='checkbox' name='races' :checked='race.active'
-				@click='toggleRace(race)'
+		<Section>
+			<Title>Players</Title>
+			<p class='[ lh-copy ]'>
+				Number of players: <b class='[ ml1 f3 v-mid ]'>{{ players.length }}</b>
+			</p>
+			<div class='[ mb4 flex flex-row justify-around ]'>
+				<Button styling='d' @click.native='addPlayer'> Add player </Button>
+				<Button styling='h' @click.native='removePlayer'> Remove player </Button>
+			</div>
+			<div>
+				<label class='[ dib mb2 ]'>Add names seperated by <b>;</b></label>
+				<textarea
+				v-model='player_names'
+				placeholder='Bob; Joe; June' rows='4'
+				class='[ w-80 pa1 ]'
 				/>
-				{{ race.name }}
-			</label>
-		</fieldset>
+			</div>
+		</Section>
 
-		<p>Select <b>{{ numberOfAdditionalRacesNeeded }}</b> additional races (selected: {{ activeRaces.length }}; min: {{ minNumberOfRaces }})</p>
-
-		<div>
-			Races per Player:
-			<select
-			v-model='races_per_player'
-			>
-				<option
-				v-for='i in Math.floor(races.length/players.length)' :key='i'
-				:value='i' :selected='i == races_per_player'
+		<Section>
+			<Title>Options</Title>
+			<div class='[ flex flex-column items-center ]'>
+				Races per player:
+				<select
+				v-model='races_per_player'
+				class='[ mt1 pa1 ]'
 				>
-					{{ i }}
-				</option>
-			</select>
-		</div>
+					<option
+					v-for='i in Math.floor(races.length/players.length)' :key='i'
+					:value='i' :selected='i == races_per_player'
+					>
+						{{ i }}
+					</option>
+				</select>
+			</div>
+			<div class='[ mt4 flex flex-column items-center ]'>
+				Speaker selection:
+				<select
+				v-model='speaker_option'
+				class='[ mt1 pa1 ]'
+				>
+					<option value = '1'>Don't give</option>
+					<option value = '2'>Randomly give</option>
+					<!-- <option value = '3' :disabled='races_per_player <= 1'>Randomly distribute with 1 fewer race choice</option> -->
+				</select>
+			</div>
+		</Section>
 
-		<p>Races per Player: {{ races_per_player }}</p>
+		<Section>
+			<Title>Races</Title>
+			<div class='[ flex flex-row justify-around ]'>
+				<Button styling='d' @click.native='checkAllRaces(true)'> Check all </Button>
+				<Button styling='h' @click.native='checkAllRaces(false)'> Uncheck all </Button>
+			</div>
 
-		<div>
-			Speaker Option:
-			<select v-model='speaker_option'>
-				<option value = '1'>Don't distribute</option>
-				<option value = '2'>Randomly distribute</option>
-				<!-- <option value = '3' :disabled='races_per_player <= 1'>Randomly distribute with 1 fewer race choice</option> -->
-			</select>
-		</div>
+			<div class='[ ph4 tl flex flex-column ]'>
+				<p class='[ lh-copy f7 ]'><b>*</b> races are recommended for new players</p>
 
-		<p>Speaker Option: {{ speaker_option }}</p>
+				<label
+				v-for='race in races' :key='race.name'
+				class='[ pv1 ]'
+				>
+					<input
+					type='checkbox' name='races' :checked='race.active'
+					@click='toggleRace(race)'
+					/>
+					{{ race.name }}
+				</label>
+			</div>
 
-		<button @click='generatePlayerRaces' :disabled='numberOfAdditionalRacesNeeded !== 0'>GENERATE</button>
+			<p class='[ lh-copy ]'>Select <b class='[ mh1 f3 v-mid ]'>{{ numberOfAdditionalRacesNeeded }}</b> additional races</p>
 
-		<p
-		v-for='player in players' :key='player.id'
-		>
-			{{ player.id }} ({{ player.name }}):
-			<span
-			v-for='(race, index) in player.races'
+			<Button
+			styling='c'
+			@click.native='generatePlayerRaces'
+			:disabled='numberOfAdditionalRacesNeeded !== 0'
 			>
-				({{ index + 1 }}) <b>{{ race }}</b>
-			</span>
-		</p>
+				GENERATE
+			</Button>
+		</Section>
+
+		<Player
+		v-for='player in players' :key='player.id'
+		:player='player'
+		/>
+
+		<div class='[ tc ]'>
+			<Button styling='c'
+			:href='"/shared/" + generatePlayersString()'
+			>
+				Share
+			</Button>
+		</div>
 	</div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
+import Button from '~/components/Button'
+import Player from '~/components/Player'
+import Section from '~/components/Section'
+import Title from '~/components/Title'
 
 export default {
 	computed: {
@@ -143,7 +157,18 @@ export default {
 			'updateRacesPerPlayer',
 			'generatePlayerRaces',
 			'updatePlayerNames'
-		])
+		]),
+
+		generatePlayersString: function() {
+			return LZString.compressToEncodedURIComponent(JSON.stringify(this.players))
+		}
+	},
+
+	components: {
+		Button,
+		Player,
+		Section,
+		Title
 	}
 }
 </script>

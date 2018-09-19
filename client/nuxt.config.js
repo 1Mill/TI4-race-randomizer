@@ -28,12 +28,16 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    'tachyons',
+    '~/assets/generic.extend-tachyons.css',
+    '~/assets/generic.font.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-clipboard2'
   ],
 
   /*
@@ -61,7 +65,8 @@ module.exports = {
 
     plugins: [
       new webpack.ProvidePlugin({
-        '_': 'lodash'
+        '_': 'lodash',
+        'LZString': 'lz-string'
       })
     ]
   },
