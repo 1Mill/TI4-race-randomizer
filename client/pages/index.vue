@@ -1,13 +1,5 @@
 <template>
 	<div>
-		<ol>
-			<li>Determine the number of players and/or Enter names</li>
-			<li>Check the boxes for each race you want to play with</li>
-			<li>Number of Choices per player</li>
-			<li>Optional Speaker options</li>
-			<li>Deal out races</li>
-		</ol>
-
 		<Section>
 			<Title>Players</Title>
 			<p class='[ lh-copy ]'>
@@ -89,22 +81,25 @@
 			</Button>
 		</Section>
 
-		<p
+		<Player
 		v-for='player in players' :key='player.id'
-		>
-			{{ player.id }} ({{ player.name }}):
-			<span
-			v-for='(race, index) in player.races'
+		:player='player'
+		/>
+
+		<div class='[ tc ]'>
+			<Button styling='c'
+			:href='"/shared/" + generatePlayersString()'
 			>
-				({{ index + 1 }}) <b>{{ race }}</b>
-			</span>
-		</p>
+				Share link
+			</Button>
+		</div>
 	</div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 import Button from '~/components/Button'
+import Player from '~/components/Player'
 import Section from '~/components/Section'
 import Title from '~/components/Title'
 
@@ -162,11 +157,16 @@ export default {
 			'updateRacesPerPlayer',
 			'generatePlayerRaces',
 			'updatePlayerNames'
-		])
+		]),
+
+		generatePlayersString: function() {
+			return LZString.compressToEncodedURIComponent(JSON.stringify(this.players))
+		}
 	},
 
 	components: {
 		Button,
+		Player,
 		Section,
 		Title
 	}

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <nuxt/>
+    <nuxt
+	class='[ mb3 ]'
+	/>
   </div>
 </template>
 
