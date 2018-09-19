@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <nuxt
-	class='[ mb3 ]'
-	/>
-  </div>
+	<div>
+		<nuxt
+		class='[ mb3 ]'
+		/>
+	</div>
 </template>
 
 <style>
