@@ -90,7 +90,7 @@
 			<Button styling='c'
 			:href='"/shared/" + generatePlayersString()'
 			>
-				Share link
+				Share
 			</Button>
 		</div>
 	</div>
