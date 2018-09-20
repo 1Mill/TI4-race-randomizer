@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Section>
-			<Title>Players</Title>
+			<Title class='[ mt0 ]'>Players</Title>
 			<p class='[ lh-copy ]'>
 				Number of players: <b class='[ ml1 f3 v-mid ]'>{{ players.length }}</b>
 			</p>
