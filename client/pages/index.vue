@@ -55,19 +55,23 @@
 				<Button styling='h' @click.native='checkAllRaces(false)'> Uncheck all </Button>
 			</div>
 
-			<div class='[ ph4 tl flex flex-column ]'>
+			<div class='[ ph4 tl flex flex-column items-center ]'>
 				<p class='[ lh-copy f7 ]'><b>*</b> races are recommended for new players</p>
 
-				<label
+				<div
 				v-for='race in races' :key='race.name'
-				class='[ pv1 ]'
+				class='[ w-100 flex flex-column items-center ]'
 				>
-					<input
-					type='checkbox' name='races' :checked='race.active'
-					@click='toggleRace(race)'
-					/>
-					{{ race.name }}
-				</label>
+					<label
+					class='[ w-75 pv1 ][ w-60-ns ][ w-third-l pl5-l ]'
+					>
+						<input
+						type='checkbox' name='races' :checked='race.active'
+						@click='toggleRace(race)'
+						/>
+						{{ race.name }}
+					</label>
+				</div>
 			</div>
 
 			<p class='[ lh-copy ]'>Select <b class='[ mh1 f3 v-mid ]'>{{ numberOfAdditionalRacesNeeded }}</b> additional races</p>
