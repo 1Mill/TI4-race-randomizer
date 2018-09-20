@@ -93,7 +93,7 @@
 
 			<div class='[ tc ]'>
 				<Button styling='c'
-				:href='"/shared?code=" + generatePlayersString()'
+				:href='"/shared#" + generatePlayersString()'
 				class='[ mt3 ]'
 				>
 					Share

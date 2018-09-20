@@ -36,8 +36,8 @@ export default {
 	},
 
 	mounted: function () {
-		// Get generate players code from params
-		const code = this.$route.query.code
+		// Get generate players code from hash (excluding the "#" symbol)
+		const code = window.location.hash.substring(1)
 
 		// Parse players from generated code
 		this.players = JSON.parse(LZString.decompressFromEncodedURIComponent(code))
