@@ -14,7 +14,7 @@
 				Copy link
 			</Button>
 		</div>
-		<div class='[ ph1 flex flex-column ]'>
+		<div class='[ ph1 flex flex-column items-center ]'>
 			<Player
 			v-for='player in players' :key='player.id'
 			:player='player'

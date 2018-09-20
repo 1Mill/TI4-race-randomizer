@@ -81,22 +81,25 @@
 			@click.native='generatePlayerRaces'
 			:disabled='numberOfAdditionalRacesNeeded !== 0'
 			>
-				GENERATE
+				Deal races
 			</Button>
+
+			<div class='[ mt3 flex flex-column items-center ]'>
+				<Player
+				v-for='player in players' :key='player.id'
+				:player='player'
+				/>
+			</div>
+
+			<div class='[ tc ]'>
+				<Button styling='c'
+				:href='"/shared?code=" + generatePlayersString()'
+				class='[ mt3 ]'
+				>
+					Share
+				</Button>
+			</div>
 		</Section>
-
-		<Player
-		v-for='player in players' :key='player.id'
-		:player='player'
-		/>
-
-		<div class='[ tc ]'>
-			<Button styling='c'
-			:href='"/shared?code=" + generatePlayersString()'
-			>
-				Share
-			</Button>
-		</div>
 	</div>
 </template>
 
