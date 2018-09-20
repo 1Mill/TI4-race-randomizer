@@ -88,7 +88,7 @@
 
 		<div class='[ tc ]'>
 			<Button styling='c'
-			:href='"/shared/" + generatePlayersString()'
+			:href='"/shared?code=" + generatePlayersString()'
 			>
 				Share
 			</Button>

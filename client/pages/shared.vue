@@ -35,21 +35,26 @@ export default {
 		}
 	},
 
-	created: function () {
-		// Get object from params
-		const string = this.$route.params['object']
-
-		// Parse players from generated string
-		this.players = JSON.parse(LZString.decompressFromEncodedURIComponent(string))
-	},
-
 	mounted: function () {
+		// Get generate players code from params
+		const code = this.$route.query.code
+
+		// Parse players from generated code
+		this.players = JSON.parse(LZString.decompressFromEncodedURIComponent(code))
+
+		// Get link with appropriate params
 		this.link = window.location
 	},
 
 	components: {
 		Button,
 		Player
+	},
+
+	watch: {
+		code: function (value) {
+			this.players = JSON.parse(LZString.decompressFromEncodedURIComponent(value))
+		}
 	}
 }
 </script>
