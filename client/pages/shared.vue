@@ -49,12 +49,6 @@ export default {
 	components: {
 		Button,
 		Player
-	},
-
-	watch: {
-		code: function (value) {
-			this.players = JSON.parse(LZString.decompressFromEncodedURIComponent(value))
-		}
 	}
 }
 </script>
