@@ -4,6 +4,7 @@
 			<nuxt
 			class='[ mb4 ]'
 			/>
+
 			<div class='[ pv2 bg-brand-second flex flex-row justify-around ]'>
 				<Button styling='dw' href='/'>Home / Restart</Button>
 				<Button styling='hw' href='https://github.com/1Mill/twilight-imperium-race-selector' target='_blank'>Source code</Button>
