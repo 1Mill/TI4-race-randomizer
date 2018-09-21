@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<article class='[ mb3 ]'>
+			Twilight Imperium 4 (TI4) race randomizer you can share with friends.
+		</article>
+
 		<Section>
 			<Title class='[ mt0 ]'>Players</Title>
 			<p class='[ lh-copy ]'>
