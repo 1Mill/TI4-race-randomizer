@@ -140,7 +140,7 @@ return new Vuex.Store({
 				players.forEach((player, index) => Vue.set(player, 'races', races[index]))
 
 				// Add names to players
-				const names = _.split(state.player_names, ';')
+				const names = _.split(state.player_names, ',')
 				players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
 
 				// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)

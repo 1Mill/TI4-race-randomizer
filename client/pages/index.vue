@@ -10,10 +10,10 @@
 				<Button styling='h' @click.native='removePlayer'> Remove player </Button>
 			</div>
 			<div>
-				<label class='[ dib mb2 ]'>Add names seperated by <b>;</b></label>
+				<label class='[ dib mb2 ]'>Add names seperated by <b>,</b></label>
 				<textarea
 				v-model='player_names'
-				placeholder='Bob; Joe; June' rows='4'
+				placeholder='Bob, Joe, June' rows='4'
 				class='[ w-80 pa1 ]'
 				/>
 			</div>
