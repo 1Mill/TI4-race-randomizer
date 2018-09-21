@@ -6,10 +6,10 @@
 1. Install dependencies within each container volume
   ```bash
   docker-compose run api yarn install
-  #> Create /node_modules/
+  #> Create /api/node_modules/
 
   docker-compose run client yarn install
-  #> Create /node_modules/
+  #> Create /client/node_modules/
   ```
 
 2. Build images
@@ -27,5 +27,7 @@
   ```bash
   docker-compose run client yarn nuxt generate
   ```
-  
+
 2. Copy files from `client/dist/` to gh-pages branch
+
+3. Delete `/client/dists/` folder (sometimes Nuxt has issues if the folder is already created)
