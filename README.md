@@ -11,12 +11,10 @@ docker-compose run api yarn install
 docker-compose run client yarn install
 #> Create /node_modules/
 ```
-
 1. Build images
 ```bash
 docker-compose build
 ```
-
 1. Start the application at localhost:3000
 ``` bash
 docker-compose up
@@ -27,5 +25,4 @@ docker-compose up
 ```bash
 docker-compose run client yarn nuxt generate
 ```
-
 1. Copy files from `client/dist/` to gh-pages branch
