@@ -1,6 +1,6 @@
 <template>
 	<a
-	class='[ dib no-underline br2 pointer underline-hover ]'
+	class='[ dib no-underline br2 pointer underline-hover _Button ]'
 	:class='getStylingClasses'
 	:style='disabled ? "cursor: not-allowed; opacity: 0.5;" : "" '
 	>
@@ -58,4 +58,9 @@ export default {
 </script>
 
 <style scoped>
+	._Button {
+		-webkit-user-select: none;  /* Chrome all / Safari all */
+		-moz-user-select: none;     /* Firefox all */
+		-ms-user-select: none;      /* IE 10+ */
+	}
 </style>
