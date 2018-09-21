@@ -56,7 +56,7 @@
 			</div>
 
 			<div class='[ ph4 flex flex-column items-center ]'>
-				<p class='[ lh-copy f7 ]'><b>*</b> races are recommended for new players</p>
+				<SymbolLegend />
 
 				<label
 				v-for='race in races' :key='race.name'
@@ -84,6 +84,8 @@
 				Deal races
 			</Button>
 
+			<SymbolLegend />
+
 			<div class='[ mt3 flex flex-column items-center ]'>
 				<Player
 				v-for='player in players' :key='player.id'
@@ -108,6 +110,7 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import Button from '~/components/Button'
 import Player from '~/components/Player'
 import Section from '~/components/Section'
+import SymbolLegend from '~/components/SymbolLegend'
 import Title from '~/components/Title'
 
 export default {
@@ -175,6 +178,7 @@ export default {
 		Button,
 		Player,
 		Section,
+		SymbolLegend,
 		Title
 	}
 }

@@ -14,7 +14,10 @@
 				Copy link
 			</Button>
 		</div>
+
 		<div class='[ ph1 flex flex-column items-center ]'>
+			<SymbolLegend />
+
 			<Player
 			v-for='player in players' :key='player.id'
 			:player='player'
@@ -26,6 +29,7 @@
 <script>
 import Button from '~/components/Button'
 import Player from '~/components/Player'
+import SymbolLegend from '~/components/SymbolLegend'
 
 export default {
 	data: function () {
@@ -48,7 +52,8 @@ export default {
 
 	components: {
 		Button,
-		Player
+		Player,
+		SymbolLegend
 	}
 }
 </script>
