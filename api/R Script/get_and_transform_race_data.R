@@ -31,16 +31,16 @@ data = data %>% filter_all(any_vars(!is.na(.)))
 
 # Initialize a new data frame
 df = data.frame(
-    Name = character(),
-    HomeSystem = character(),
-    Abilities = character(),
-    Commodities = character(),
-    PromissaryNote = character(),
-    StartingFleet = character(),
-    StartingTech = character(),
-    SpecialUnits = character(),
-    FactionTech = character(),
-    Flagship = character(),
+    name = character(),
+    homeSystem = character(),
+    abilities = character(),
+    commodities = character(),
+    promissaryNote = character(),
+    startingFleet = character(),
+    startingTech = character(),
+    specialUnits = character(),
+    factionTech = character(),
+    flagship = character(),
     stringsAsFactors = FALSE
   )
 
@@ -64,7 +64,7 @@ for (n in 1:17) {
 starting_races = c("Barony of Letnev", "Emirates of Hacan", "Sardak N'orr", "Federation of Sol", "Universities of Jol-Nar", "Xxcha Kingdom")
 
 df = df %>%
-  mutate(Difficulty = ifelse(Name %in% starting_races, 1, 7), UrlName = snakecase::to_any_case(Name, "snake"))
+  mutate(difficulty = ifelse(name %in% starting_races, 1, 7), urlName = snakecase::to_any_case(name, "snake"))
 
 # Export manupulated data as JSON file
 write(paste('{"races":', jsonlite::toJSON(df, pretty=FALSE), '}'), "../db.json")
