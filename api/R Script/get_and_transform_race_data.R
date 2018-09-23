@@ -47,7 +47,7 @@ df = data.frame(
 # Iterate through each race (i.e. 10 rows == one race) to parse information and there are a total of 17 races.
 for (n in 1:17) {
   i = 10 * (n - 1) + 1
-  
+
   df[n, "name"]           = data[i, 1]
   df[n, "homeSystem"]     = data[i+1, 2]
   df[n, "abilities"]      = data[i+2, 2]
@@ -63,10 +63,8 @@ for (n in 1:17) {
 # Add custom columns (difficulty and friendly URL name)
 starting_races = c("Barony of Letnev", "Emirates of Hacan", "Sardak N'orr", "Federation of Sol", "Universities of Jol-Nar", "Xxcha Kingdom")
 
-df = df %>% 
+df = df %>%
   mutate(Difficulty = ifelse(Name %in% starting_races, 1, 7), UrlName = snakecase::to_any_case(Name, "snake"))
 
 # Export manupulated data as JSON file
-df.json = jsonlite::toJSON(df, pretty=FALSE)
-
-write(paste('{"races":', df.json, '}'), "../db.json")
+write(paste('{"races":', jsonlite::toJSON(df, pretty=FALSE), '}'), "../db.json")
