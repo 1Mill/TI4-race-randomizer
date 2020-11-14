@@ -20,11 +20,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci
+        run: yarn install
         working-directory: ./client
 
       - name: Build site 🏗️
-        run: npm run generate
+        run: yarn run generate
         working-directory: ./client
 
       - name: Deploy site 🚀
