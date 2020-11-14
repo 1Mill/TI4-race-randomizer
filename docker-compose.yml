@@ -14,12 +14,3 @@ services:
     volumes:
       - ./client:/app
     working_dir: /app
-
-  api:
-    command: yarn json-server --watch db.json --host 0.0.0.0 --port 3000
-    image: node:12-alpine
-    ports:
-      - 3001:3000
-    volumes:
-      - ./api:/app
-    working_dir: /app
