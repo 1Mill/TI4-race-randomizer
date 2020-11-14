@@ -1,0 +1,39 @@
+name: CICD
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '12'
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci
+        working-directory: ./client
+
+      - name: Build site 🏗️
+        run: npm run generate
+        working-directory: ./client
+
+      - name: Deploy site 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: ./client/dist
+
+on:
+  push:
+    branches:
+      - master
