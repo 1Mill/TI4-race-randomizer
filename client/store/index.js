@@ -1,6 +1,8 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 
+import { default as RACES_DATA } from '../data/races.json'
+
 const createStore = () => {
 return new Vuex.Store({
 	state: {
@@ -74,8 +76,8 @@ return new Vuex.Store({
 	actions: {
 		async nuxtServerInit ({ state, commit }) {
 			// Init races to store
-			const data = await this.$axios.$get(`/races`)
-			commit('SET_RACES', data)
+			const { races } = RACES_DATA
+			commit('SET_RACES', races)
 
 			// Add attribute attribute to races
 			commit('INIT_RACE_ACTIVE_ATTRIBUTE')
