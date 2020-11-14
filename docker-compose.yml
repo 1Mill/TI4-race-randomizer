@@ -2,7 +2,7 @@ version: '3'
 
 services:
   client:
-    command: yarn nuxt
+    command: npm run dev
     depends_on:
       - api
     environment:
