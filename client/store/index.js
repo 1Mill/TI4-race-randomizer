@@ -77,7 +77,7 @@ return new Vuex.Store({
 		async nuxtServerInit ({ state, commit }) {
 			// Init races to store
 			const { races } = RACES_DATA
-			commit('SET_RACES', races)
+			commit('SET_RACES', races.sort((a,b) => a.name.localeCompare(b.name)))
 
 			// Add attribute attribute to races
 			commit('INIT_RACE_ACTIVE_ATTRIBUTE')
