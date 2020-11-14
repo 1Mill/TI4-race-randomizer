@@ -1,33 +1,21 @@
-# TI4-race-randomizer
+# www.tiraces.com
 
-> Race selector for the board game Twilight Imperium 4th Edition (TI4)
+> Race randomizer for the board game Twilight Imperium 4th Edition (TI4)
 
-# Getting started in development
-1. Install dependencies within each container volume
-  ```bash
-  docker-compose run api yarn install
-  #> Create /api/node_modules/
+## Getting started in development
 
-  docker-compose run client yarn install
-  #> Create /client/node_modules/
-  ```
+1. Install client dependancies
 
-2. Build images
-  ```bash
-  docker-compose build
-  ```
+    ```bash
+    docker-compose run client sh -c "npm install"
+    ```
 
-3. Start the application at localhost:3000
-  ``` bash
-  docker-compose up
-  ```
+1. Run the application
 
-# Update gh-pages
-1. Generate static files
-  ```bash
-  docker-compose run client yarn nuxt generate
-  ```
+    ```bash
+    docker-compose up client
+    ```
 
-2. Copy files from `client/dist/` to gh-pages branch
+## Deploying
 
-3. Delete `/client/dists/` folder (sometimes Nuxt has issues if the folder is already created)
+This project usings GitHub Actions to automatically deploy changes to <https://www.tiraces.com/>
