@@ -11,7 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "lz-string": "^1.4.4",
     "nuxt": "^2.14.7",
     "tachyons": "^4.12.0",
