@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Button from '~/components/Button'
 import Player from '~/components/Player'
 import SymbolLegend from '~/components/SymbolLegend'
@@ -48,6 +49,12 @@ export default {
 
 		// Get link with appropriate params
 		this.link = window.location
+	},
+
+	methods: {
+		...mapActions([
+			'revealPlayer'
+		])
 	},
 
 	components: {
