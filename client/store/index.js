@@ -57,6 +57,10 @@ return new Vuex.Store({
 			player.revealed = true
 		},
 
+		PUT_IS_PLAYER_RACES_SHOWN: function (state, value) {
+			state.is_player_races_shown = value
+		},
+
 		// Update race.active to FALSE
 		PUT_RACE_ACTIVE_TO_FALSE: function (state, race) {
 			Vue.set(race, 'active', false)
@@ -78,7 +82,7 @@ return new Vuex.Store({
 
 		PUT_SPEAKER_OPTION: function (state, value) {
 			state.speaker_option = value
-		}
+		},
 	},
 
 	actions: {
@@ -121,6 +125,11 @@ return new Vuex.Store({
 			} else {
 				commit('PUT_RACE_ACTIVE_TO_TRUE', race)
 			}
+		},
+
+		togglePlaceRacesShown: function({ state, commit }) {
+			commit('PUT_IS_PLAYER_RACES_SHOWN', !state.is_player_races_shown)
+			state.players.forEach((player) => Vue.set(player, 'revealed', state.is_player_races_shown))
 		},
 
 		checkAllRaces: function ({ state, commit }, boolean) {

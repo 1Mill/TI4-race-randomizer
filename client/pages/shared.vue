@@ -60,7 +60,7 @@ export default {
 	components: {
 		Button,
 		Player,
-		SymbolLegend
+		SymbolLegend,
 	}
 }
 </script>

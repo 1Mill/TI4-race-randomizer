@@ -90,6 +90,10 @@
 
 			<SymbolLegend />
 
+			<Button styling='h' @click.native='togglePlaceRacesShown'>
+				{{ is_player_races_shown ? 'Hide' : 'Show' }} player races
+			</Button>
+
 			<div class='[ mt3 flex flex-column items-center ]'>
 				<Player
 				v-for='player in players' :key='player.id'
@@ -121,8 +125,9 @@ export default {
 	computed: {
 		// Traditional Store States
 		...mapState ([
+			'is_player_races_shown',
 			'players',
-			'races'
+			'races',
 		]),
 
 		// Store States that need to be updated using v-model
@@ -165,17 +170,22 @@ export default {
 	methods: {
 		...mapActions([
 			'addPlayer',
+			'checkAllRaces',
+			'generatePlayerRaces',
 			'removePlayer',
 			'revealPlayer',
+			'togglePlaceRacesShown',
 			'toggleRace',
-			'checkAllRaces',
+			'updatePlayerNames',
 			'updateRacesPerPlayer',
-			'generatePlayerRaces',
-			'updatePlayerNames'
 		]),
 
 		generatePlayersString: function() {
-			return LZString.compressToEncodedURIComponent(JSON.stringify(this.players))
+			const players = this.players.map(player => ({
+				...player,
+				revealed: this.is_player_races_shown,
+			}))
+			return LZString.compressToEncodedURIComponent(JSON.stringify(players))
 		}
 	},
 
