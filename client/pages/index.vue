@@ -166,6 +166,7 @@ export default {
 		...mapActions([
 			'addPlayer',
 			'removePlayer',
+			'revealPlayer',
 			'toggleRace',
 			'checkAllRaces',
 			'updateRacesPerPlayer',

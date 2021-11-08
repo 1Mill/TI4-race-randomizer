@@ -36,7 +36,9 @@ return new Vuex.Store({
 					{
 						id: 'Player ' + index,
 						name: name,
-						races: []
+						races: [],
+						revealed: false,
+						speaker: false
 					}
 				)
 			}
@@ -47,6 +49,10 @@ return new Vuex.Store({
 			if (state.players.length > 2) {
 				state.players.pop()
 			}
+		},
+
+		REVEAL_PLAYER: function (state, player) {
+			player.revealed = true
 		},
 
 		// Update race.active to FALSE
@@ -102,6 +108,10 @@ return new Vuex.Store({
 			commit('DELETE_PLAYER')
 		},
 
+		revealPlayer: function ({ commit }, player) {
+			commit('REVEAL_PLAYER', player)
+		},
+
 		toggleRace: function ({ commit }, race) {
 			if (race.active === true) {
 				// Turn false
@@ -145,11 +155,16 @@ return new Vuex.Store({
 				const names = _.split(state.player_names, ',')
 				players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
 
+				// Clear speaker
+				players.forEach((player, index) => Vue.set(player, 'speaker', false))
+
 				// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)
 				if (speaker_option == 2) {
-					_.sample(players).races.unshift('**SPEAKER**')
+					Vue.set(_.sample(players), 'speaker', true)
 				}
 			}
+
+			players.forEach((player, index) => Vue.set(player, 'revealed', false))
 		},
 
 		updatePlayerNames: function ({ commit }, string) {

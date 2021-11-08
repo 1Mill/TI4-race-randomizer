@@ -5,10 +5,21 @@
 			<div v-else>{{ player.name }}</div>
 		</h1>
 		<div class='[ w-60 pl3 tl ][][ w-50-l ]'>
-			<div
-			v-for='(race, index) in player.races' :key='race'
-			>
-				{{ race }}
+			<div v-if='player.speaker===true'><b>SPEAKER</b></div>
+			<div v-if='player.revealed===true'>
+				<div
+				v-for='(race, index) in player.races' :key='race'
+				>
+					{{ race }}
+				</div>
+			</div>
+			<div v-else class='[ mb4 flex flex-row justify-around ]'>
+				<Button
+				styling='d'
+				@click.native='revealPlayer(player)'
+				>
+					Reveal races
+				</Button>
 			</div>
 		</div>
 		<br /> <!-- Added so that copy + paste is broken up into groups -->
@@ -16,12 +27,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import Button from '~/components/Button'
 export default {
 	props: {
 		player: {
 			required: true,
 			type: Object
 		}
+	},
+
+	methods: {
+		...mapActions([
+			'revealPlayer'
+		])
+	},
+
+	components: {
+		Button
 	}
 }
 </script>
