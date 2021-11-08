@@ -12,7 +12,9 @@ return new Vuex.Store({
 
 		races_per_player: 2,
 
-		speaker_option: 1
+		speaker_option: 1,
+
+		is_reveal_feature_enabled: false,
 	},
 
 	mutations: {
@@ -37,7 +39,7 @@ return new Vuex.Store({
 						id: 'Player ' + index,
 						name: name,
 						races: [],
-						revealed: false,
+						revealed: !state.is_reveal_feature_enabled,
 						speaker: false
 					}
 				)
@@ -134,6 +136,7 @@ return new Vuex.Store({
 		},
 
 		generatePlayerRaces: function ({ state, commit, getters }) {
+			const is_player_revealed = !state.is_reveal_feature_enabled
 			const players = state.players
 			const races_per_player = state.races_per_player
 			const speaker_option = state.speaker_option
@@ -164,7 +167,7 @@ return new Vuex.Store({
 				Vue.set(_.sample(players), 'speaker', true)
 			}
 
-			players.forEach((player) => Vue.set(player, 'revealed', false))
+			players.forEach((player) => Vue.set(player, 'revealed', is_player_revealed))
 		},
 
 		updatePlayerNames: function ({ commit }, string) {
