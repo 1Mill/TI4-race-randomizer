@@ -133,7 +133,7 @@ return new Vuex.Store({
 			commit('PUT_RACES_PER_PLAYER', value)
 		},
 
-		generatePlayerRaces: function ({ state, _commit, getters }) {
+		generatePlayerRaces: function ({ state, commit, getters }) {
 			const players = state.players
 			const races_per_player = state.races_per_player
 			const speaker_option = state.speaker_option
