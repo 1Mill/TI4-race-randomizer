@@ -155,8 +155,8 @@ return new Vuex.Store({
 				const names = _.split(state.player_names, ',')
 				players.forEach((player, index) => Vue.set(player, 'name', names[index] || 'unknown'))
 
-				// Clear speaker
-				players.forEach((player, index) => Vue.set(player, 'speaker', false))
+				// Remove speaker from all players
+				players.forEach((player) => Vue.set(player, 'speaker', false))
 
 				// Add speaker to player (1: Don't, 2: Random, 3: Random and -1 Race)
 				if (speaker_option == 2) {
