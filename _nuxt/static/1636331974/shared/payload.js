@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/shared", {data:[{}],fetch:{},mutations:[]});
