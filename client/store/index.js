@@ -164,7 +164,7 @@ return new Vuex.Store({
 				}
 			}
 
-			players.forEach((player, index) => Vue.set(player, 'revealed', false))
+			players.forEach((player) => Vue.set(player, 'revealed', false))
 		},
 
 		updatePlayerNames: function ({ commit }, string) {
