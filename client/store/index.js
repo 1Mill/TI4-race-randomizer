@@ -40,7 +40,7 @@ return new Vuex.Store({
 						name: name,
 						races: [],
 						revealed: state.is_player_races_shown,
-						speaker: false
+						speaker: false,
 					}
 				)
 			}
