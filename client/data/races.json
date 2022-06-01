@@ -13,7 +13,7 @@
 	    "flagship": "Duha Menaimon\nCost 8 - Combat 7x2 - Move 1 - Capacity 5 - Sustain Damage\nAfter you activate this system you may produce up to 5 units in this system"
 	  },
 	  {
-	    "name": "Barony of Letnev *",
+	    "name": "Barony of Letnev ¹",
 	    "homeSystem": "4/0 2/1",
 	    "abilities": "Munitions Reserves\nAt the start of each round of space combat, you may spend 2 trade goods: you may reroll any number of your dice during that combat round.\n\nArmada\nThe maximum number of non-fighter ships your fleet can have in each system is equal to 2 more than the number of tokens in your fleet pool.",
 	    "commodities": 2,
@@ -49,7 +49,7 @@
 	    "flagship": "The Inferno\nCost 8 - Combat 5x2 - Move 1 - Capacity 3 - Sustain Damage\nAction : Spend 1 token from your strategy pool to place 1 cruiser in this unit's system"
 	  },
 	  {
-	    "name": "Emirates of Hacan *",
+	    "name": "Emirates of Hacan ¹",
 	    "homeSystem": "2/1 0/1 1/1",
 	    "abilities": "Masters of Trade\nYou do not have to spend a command token to resolve the secondary ability of the Trade strategy card.\n\nGuild Ships\nYou can negotiate transactions with players who are not your neighbor\n\nArbiters\nWhen you are negotiating a transaction, action cards can be exchanged as part of that transaction.",
 	    "commodities": 6,
@@ -61,7 +61,7 @@
 	    "flagship": "Wrath of Kenara\nCost 8 - Combat 7x2 - Move 1 - Capacity 3 - Sustain Damage\nAfter you roll a die during a space combat in this system, you may spend 1 trade good to apply +1 to the attack."
 	  },
 	  {
-	    "name": "Federation of Sol *",
+	    "name": "Federation of Sol ¹",
 	    "homeSystem": "4/2",
 	    "abilities": "Critical Drop\nAction : Spend 1 token from your strategy pool to place 2 infantry from your reinforcements on 1 planet you control.\n\nVersatile\nWhen you gain command tokens during the status phase, gain 1 additional command token.",
 	    "commodities": 4,
@@ -133,7 +133,7 @@
 	    "flagship": "The Alastor\nCost 8 - Combat 9x2 - Move 1 - Capacity 3 - Sustain Damage\nAt the start of a space combat, choose any number of your ground forces in this system to participate in that combat as if they were ships."
 	  },
 	  {
-	    "name": "Sardak N'orr *",
+	    "name": "Sardak N'orr ¹",
 	    "homeSystem": "3/1 1/0",
 	    "abilities": "Unrelenting\nApply +1 to the result of each of your unit's combat rolls",
 	    "commodities": 3,
@@ -145,7 +145,7 @@
 	    "flagship": "C'Morran N'orr\nCost 8 - Combat 6x2 - Move 1 - Capacity 3 - Sustain Damage\nApply +1 to the result of each of your other ship's combat rolls in this system."
 	  },
 	  {
-	    "name": "Universities of Jol-Nar *",
+	    "name": "Universities of Jol-Nar ¹",
 	    "homeSystem": "2/3 1/2",
 	    "abilities": "Fragile\nApply -1 to the result of each of your unit's combat rolls.\n\nBrilliant\nWhen you spend a command token to resolve the secondary ability of the Technology strategy card, you may resolve the primary ability instead.\n\nAnalytical\nWhen you research a technology that is not a unit upgrade technology, you may ignore 1 prerequisite.",
 	    "commodities": 4,
@@ -169,7 +169,7 @@
 	    "flagship": "Salai Sai Corian\nCost 8 - Combat 7x1 - Move 1 - Capacity 3 - Sustain Damage\nWhen this unit makes a combat roll, it rolls a number of dice equal to the number of your opponent's non-fighter ships in this system."
 	  },
 	  {
-	    "name": "Xxcha Kingdom *",
+	    "name": "Xxcha Kingdom ¹",
 	    "homeSystem": "2/3 1/1",
 	    "abilities": "Peace Accords\nAfter you resolve the primary or secondary ability of the Diplomacy strategy card, you may gain control of 1 planet other than Mecatol Rex that does not contain any units and is in a system that is adjacent to a planet you control\n\nQuash\nWhen an agenda is revealed, you may spend 1 token from your strategy pool to discard that agenda and reveal 1 agenda from the top of the deck. Players vote on this agenda instead.",
 	    "commodities": 4,
