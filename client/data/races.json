@@ -85,7 +85,7 @@
 	    "flagship": "Hil Colish\nCost 8 - Combat 5x1 - Move 1 - Capacity 3 - Sustain Damage\nThis ship's system contains a Delta wormhole.\nDuring movement, this ship may move before or after your other ships."
 	  },
 	  {
-	    "name": "L1z1x Mindnet",
+	    "name": "L1z1x Mindnet ¹",
 	    "homeSystem": "5/0",
 	    "abilities": "Assimilate\nWhen you gain control of a planet, replace each PDS and space dock that is on that planet with a matching unit from your reinforcements.\n\nHarrow\nAfter each round of ground combat, your ships in the active system may use their bombardment ability against your opponent's ground forces on the planet.",
 	    "commodities": 2,
@@ -133,7 +133,7 @@
 	    "flagship": "The Alastor\nCost 8 - Combat 9x2 - Move 1 - Capacity 3 - Sustain Damage\nAt the start of a space combat, choose any number of your ground forces in this system to participate in that combat as if they were ships."
 	  },
 	  {
-	    "name": "Sardak N'orr ¹",
+	    "name": "Sardak N'orr",
 	    "homeSystem": "3/1 1/0",
 	    "abilities": "Unrelenting\nApply +1 to the result of each of your unit's combat rolls",
 	    "commodities": 3,
@@ -193,7 +193,7 @@
 	    "flagship": "Van Hauge\nCost 8 - Combat 9x2 - Move 1 - Capacity 3 - Sustain Damage\nWhen this ship is destroyed, destroy all ships in this system."
 	  },
 	  {
-	    "name": "Yssaril Tribes",
+	    "name": "Yssaril Tribes ¹",
 	    "homeSystem": "2/3 1/2",
 	    "abilities": "Stall Tactics\nAction : Discard 1 action card from your hand\n\nScheming\nWhen you draw 1 or more action cards, draw 1 additional action card. Then choose and discard 1 action card from your hand.\n\nCrafty\nYou can have any number of action cards in your hand. Game effects cannot prevent you from using this ability.",
 	    "commodities": 3,
