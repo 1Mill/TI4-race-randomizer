@@ -15,7 +15,7 @@
 			</Button>
 		</div>
 
-		<div class='[ ph1 flex flex-column items-center ]'>
+		<div class='[ ph1 flex flex-column items-center ]' style='gap: 1.25rem;'>
 			<SymbolLegend />
 
 			<Player
