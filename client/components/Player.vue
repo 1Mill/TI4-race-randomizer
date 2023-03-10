@@ -1,6 +1,6 @@
 <template>
-	<div class='[ w-100 mv2 flex flex-row justify-between ][][ pr4-l ]'>
-		<h1 class='[ w-40 f5 lh-title tr ][][ w-50-l ]'>
+	<div class='[ w-100 mv2 flex justify-between ][][ pr4-l ]'>
+		<h1 class='[ ma0 w-40 f5 lh-title tr ][][ w-50-l ]'>
 			<div v-if='player.name === "unknown"'>{{ player.id }}</div>
 			<div v-else>{{ player.name }}</div>
 		</h1>

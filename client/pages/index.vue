@@ -96,7 +96,7 @@
 				{{ is_player_races_shown ? 'Hide' : 'Show' }} player races
 			</Button>
 
-			<div class='[ mt3 flex flex-column items-center ]'>
+			<div class='[ mt3 flex flex-column items-center ]' style='gap: 1.25rem;'>
 				<Player
 				v-for='player in players' :key='player.id'
 				:player='player'
