@@ -88,7 +88,9 @@
 				Deal races
 			</Button>
 
-			<SymbolLegend />
+			<div class='[ mt5 flex justify-center ]'>
+				<SymbolLegend />
+			</div>
 
 			<Button styling='h' @click.native='togglePlaceRacesShown'>
 				{{ is_player_races_shown ? 'Hide' : 'Show' }} player races
