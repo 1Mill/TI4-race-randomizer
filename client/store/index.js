@@ -3,8 +3,7 @@ import Vue from 'vue'
 
 import { default as RACES_DATA } from '../data/races.json'
 
-const createStore = () => {
-return new Vuex.Store({
+const createStore = () => new Vuex.Store({
 	state: {
 		races: [], // Race information (length)
 		players: [], // Player information (length, name, associated race names)
@@ -202,6 +201,5 @@ return new Vuex.Store({
 		}
 	}
 })
-}
 
 export default createStore
