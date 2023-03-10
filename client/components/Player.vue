@@ -1,5 +1,5 @@
 <template>
-	<div class='[ w-100 mv2 flex flex-row justify-between items-center ][][ pr4-l ]'>
+	<div class='[ w-100 mv2 flex flex-row justify-between ][][ pr4-l ]'>
 		<h1 class='[ w-40 f5 lh-title tr ][][ w-50-l ]'>
 			<div v-if='player.name === "unknown"'>{{ player.id }}</div>
 			<div v-else>{{ player.name }}</div>
@@ -8,10 +8,16 @@
 			<div v-if='player.speaker === true'>
 				<b>SPEAKER</b>
 			</div>
-			<div v-if='player.revealed === true'>
-				<div v-for='race in player.races' :key='race'>
+			<div v-if='player.revealed === true' class='[ flex flex-column ]' style="gap: 1rem;">
+				<a
+				v-for='race in player.races'
+				:key='race'
+				:href="getRaceUrl(race)"
+				target="_blank"
+				class="[ db ]"
+				>
 					{{ race }}
-				</div>
+				</a>
 			</div>
 			<div v-else class='[ mb4 flex flex-row justify-around ]'>
 				<Button
@@ -29,6 +35,9 @@
 <script>
 import { mapActions } from 'vuex'
 import Button from '~/components/Button'
+
+import { default as RACES_DATA } from '../data/races.json'
+
 export default {
 	props: {
 		player: {
@@ -40,7 +49,12 @@ export default {
 	methods: {
 		...mapActions([
 			'revealPlayer'
-		])
+		]),
+		getRaceUrl(name) {
+			const { races } = RACES_DATA;
+			const r = races.find(r => r.name === name)
+			return r['url']
+		},
 	},
 
 	components: {
