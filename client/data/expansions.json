@@ -1,0 +1,24 @@
+{
+  "expansions": [
+    {
+      "name": "Base",
+      "key": "base",
+      "active": true
+    },
+    {
+      "name": "Prophecy of Kings",
+      "key": "pok",
+      "active": true
+    },
+    {
+      "name": "Codex",
+      "key": "codex",
+      "active": true
+    },
+    {
+      "name": "Discordant Stars",
+      "key": "discordant_stars",
+      "active": false
+    }
+  ]
+}

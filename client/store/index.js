@@ -1,13 +1,15 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 
-import { default as RACES_DATA } from '../data/races.json'
+import { default as EXPANSIONS_DATA } from '~/data/expansions.json'
+import { default as RACES_DATA } from '~/data/races.json'
 
 const createStore = () => new Vuex.Store({
 	state: {
-		races: [], // Race information (length)
-		players: [], // Player information (length, name, associated race names)
+		expansions: [], // Selected expansions
 		player_names: '',
+		players: [], // Player information (length, name, associated race names)
+		races: [], // Race information (length)
 
 		races_per_player: 2,
 
@@ -17,9 +19,9 @@ const createStore = () => new Vuex.Store({
 	},
 
 	mutations: {
-		// Add race.active attribute to all races
-		INIT_RACE_ACTIVE_ATTRIBUTE: function (state) {
-			state.races.forEach(race => Vue.set(race, 'active', true))
+		// Set state.expansions array
+		SET_EXPANSIONS: function (state, expansions) {
+			state.expansions = expansions
 		},
 
 		// Set store.races array
@@ -60,6 +62,15 @@ const createStore = () => new Vuex.Store({
 			state.is_player_races_shown = value
 		},
 
+		PUT_EXPANSION_ACTIVE_TO_FALSE: function (state, expansion) {
+			Vue.set(expansion, 'active', false)
+		},
+
+		// Update race.active to TRUE
+		PUT_EXPANSION_ACTIVE_TO_TRUE: function (state, expansion) {
+			Vue.set(expansion, 'active', true)
+		},
+
 		// Update race.active to FALSE
 		PUT_RACE_ACTIVE_TO_FALSE: function (state, race) {
 			Vue.set(race, 'active', false)
@@ -86,14 +97,20 @@ const createStore = () => new Vuex.Store({
 
 	actions: {
 		async nuxtServerInit ({ state, commit }) {
-			// Init races to store
+			// Load expansions into state
+			const { expansions } = EXPANSIONS_DATA
+			commit('SET_EXPANSIONS', expansions)
+
+			// Load races into state
 			const { races } = RACES_DATA
 			commit('SET_RACES', races.sort((a,b) => a.name.localeCompare(b.name)))
 
-			// Add attribute attribute to races
-			commit('INIT_RACE_ACTIVE_ATTRIBUTE')
+			// Default all races to active
+			state.expansions.filter(exp => exp.active).forEach(exp => {
+				state.races.filter(r => r.expansion === exp.key).forEach(r => commit('PUT_RACE_ACTIVE_TO_TRUE', r))
+			})
 
-			// Init 6 players (by default)
+			// Create 6 players by default
 			for(let i = 1; i <= 6; i++) {
 				commit('CREATE_PLAYER')
 			}
@@ -117,9 +134,17 @@ const createStore = () => new Vuex.Store({
 			commit('REVEAL_PLAYER', player)
 		},
 
+		toggleExpansion: function({ state, commit }, expansion) {
+			if (expansion.active === true) {
+				commit('PUT_EXPANSION_ACTIVE_TO_FALSE', expansion)
+				state.races.filter(r => r.expansion === expansion.key).forEach(r => commit('PUT_RACE_ACTIVE_TO_FALSE', r))
+			} else {
+				commit('PUT_EXPANSION_ACTIVE_TO_TRUE', expansion)
+			}
+		},
+
 		toggleRace: function ({ commit }, race) {
 			if (race.active === true) {
-				// Turn false
 				commit('PUT_RACE_ACTIVE_TO_FALSE', race)
 			} else {
 				commit('PUT_RACE_ACTIVE_TO_TRUE', race)

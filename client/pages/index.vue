@@ -53,6 +53,24 @@
 		</Section>
 
 		<Section>
+			<Title>Expansions</Title>
+			<label
+			v-for='expansion in expansions' :key='expansions.key'
+			class='[ w-100 pv1 flex flex-row items-center justify-center ]'
+			>
+				<div class='[ w-25 pr1 tr ][ w-third-ns ][ w-40-l ]'>
+					<input
+					type='checkbox' name='races' :checked='expansion.active'
+					@click='toggleExpansion(expansion)'
+					/>
+				</div>
+				<div class='[ w-75 tl ][ w-two-third-ns ][ w-60-l ]'>
+					{{ expansion.name }}
+				</div>
+			</label>
+		</Section>
+
+		<Section>
 			<Title>Races</Title>
 			<div class='[ flex flex-row justify-around ]'>
 				<Button styling='d' @click.native='checkAllRaces(true)'> Check all </Button>
@@ -127,12 +145,12 @@ export default {
 	computed: {
 		// Traditional Store States
 		...mapState ([
+			'expansions',
 			'is_player_races_shown',
 			'players',
 			'races',
 		]),
 
-		// Store States that need to be updated using v-model
 		races_per_player: {
 			get () {
 				return this.$store.state.races_per_player
@@ -176,6 +194,7 @@ export default {
 			'generatePlayerRaces',
 			'removePlayer',
 			'revealPlayer',
+			'toggleExpansion',
 			'togglePlaceRacesShown',
 			'toggleRace',
 			'updatePlayerNames',
