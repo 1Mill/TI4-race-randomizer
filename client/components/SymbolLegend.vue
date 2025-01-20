@@ -1,7 +1,7 @@
 <template>
-	<div class='[ mt3 mb3 tl ]'>
-		<p class='[ ma0 lh-copy f7 ]'><b>1</b> Recommended for new players</p>
-		<p class='[ ma0 lh-copy f7 ]'><b>+</b> Prophecy of Kings</p>
-		<p class='[ ma0 lh-copy f7 ]'><b>=</b> Codex</p>
+	<div class='[ mt3 mb3 tl f6 ]'>
+		<p class='[ ma0 lh-copy ]'><b>^</b> Recommended for new players</p>
+		<p class='[ ma0 lh-copy ]'><b>1</b> Prophecy of Kings</p>
+		<p class='[ ma0 lh-copy ]'><b>2</b> Codex</p>
 	</div>
 </template>

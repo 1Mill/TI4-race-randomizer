@@ -144,9 +144,10 @@ const createStore = () => new Vuex.Store({
 			}
 		},
 
-		toggleRace: function ({ commit }, race) {
+		toggleRace: function ({ state, commit }, race) {
 			if (race.active === true) {
 				commit('PUT_RACE_ACTIVE_TO_FALSE', race)
+				state.expansions.filter(e => e.key === race.expansion).forEach(e => commit('PUT_EXPANSION_ACTIVE_TO_FALSE', e))
 			} else {
 				commit('PUT_RACE_ACTIVE_TO_TRUE', race)
 			}

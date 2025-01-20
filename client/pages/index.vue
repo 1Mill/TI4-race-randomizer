@@ -53,47 +53,44 @@
 		</Section>
 
 		<Section>
-			<Title>Expansions</Title>
-			<label
-			v-for='expansion in expansions' :key='expansions.key'
-			class='[ w-100 pv1 flex flex-row items-center justify-center ]'
-			>
-				<div class='[ w-25 pr1 tr ][ w-third-ns ][ w-40-l ]'>
-					<input
-					type='checkbox' name='races' :checked='expansion.active'
-					@click='toggleExpansion(expansion)'
-					/>
-				</div>
-				<div class='[ w-75 tl ][ w-two-third-ns ][ w-60-l ]'>
-					{{ expansion.name }}
-				</div>
-			</label>
-		</Section>
-
-		<Section>
 			<Title>Races</Title>
-			<div class='[ flex flex-row justify-around ]'>
-				<Button styling='d' @click.native='checkAllRaces(true)'> Check all </Button>
-				<Button styling='h' @click.native='checkAllRaces(false)'> Uncheck all </Button>
-			</div>
 
 			<div class='[ ph4 flex flex-column items-center ]'>
 				<SymbolLegend />
 
-				<label
-				v-for='race in races' :key='race.name'
-				class='[ w-100 pv1 flex flex-row items-center justify-center ]'
-				>
-					<div class='[ w-25 pr1 tr ][ w-third-ns ][ w-40-l ]'>
-						<input
-						type='checkbox' name='races' :checked='race.active'
-						@click='toggleRace(race)'
-						/>
-					</div>
-					<div class='[ w-75 tl ][ w-two-third-ns ][ w-60-l ]'>
-						{{ race.name }}
-					</div>
-				</label>
+				<ul class='[ list tl ]'>
+					<li
+					v-for='expansion in expansions'
+					:key='expansion.key'
+					class='[ pb2 ]'
+					>
+						<label>
+							<input
+							:checked='expansion.active'
+							@click='toggleExpansion(expansion)'
+							type='checkbox'
+							/>
+							{{ expansion.name }}
+						</label>
+
+						<ul class='[ list ]'>
+							<li
+							v-for='race in races.filter(r => r.expansion === expansion.key)'
+							:key='race.name'
+							class='[ lh-title ]'
+							>
+								<label>
+									<input
+									:checked='race.active'
+									@click='toggleRace(race)'
+									type='checkbox'
+									/>
+									{{ race.name }}
+								</label>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 
 			<p class='[ lh-copy ]'>Select <b class='[ mh1 f3 v-mid ]'>{{ numberOfAdditionalRacesNeeded }}</b> additional races</p>
