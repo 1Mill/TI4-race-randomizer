@@ -55,42 +55,42 @@
 		<Section>
 			<Title>Races</Title>
 
-			<div class='[ ph4 flex flex-column items-center ]'>
+			<div class='[ flex justify-center ]'>
 				<SymbolLegend />
+			</div>
 
-				<ul class='[ list tl ]'>
-					<li
-					v-for='expansion in expansions'
-					:key='expansion.key'
-					class='[ pb2 ]'
-					>
-						<label>
-							<input
-							:checked='expansion.active'
-							@click='toggleExpansion(expansion)'
-							type='checkbox'
-							/>
-							{{ expansion.name }}
-						</label>
+			<div class='[ cf ph4 ]'>
+				<div
+				v-for='expansion in expansions'
+				:key='expansion.key'
+				class='[ fl w-100 w-50-l tl ]'
+				>
+					<label>
+						<input
+						:checked='expansion.active'
+						@click='toggleExpansion(expansion)'
+						type='checkbox'
+						/>
+						{{ expansion.name }}
+					</label>
 
-						<ul class='[ list ]'>
-							<li
-							v-for='race in races.filter(r => r.expansion === expansion.key)'
-							:key='race.name'
-							class='[ lh-title ]'
-							>
-								<label>
-									<input
-									:checked='race.active'
-									@click='toggleRace(race)'
-									type='checkbox'
-									/>
-									{{ race.name }}
-								</label>
-							</li>
-						</ul>
-					</li>
-				</ul>
+					<ul class='[ list mt2 mb4 ]'>
+						<li
+						v-for='race in races.filter(r => r.expansion === expansion.key)'
+						:key='race.name'
+						class='[ pb1 lh-title ]'
+						>
+							<label>
+								<input
+								:checked='race.active'
+								@click='toggleRace(race)'
+								type='checkbox'
+								/>
+								{{ race.name }}
+							</label>
+						</li>
+					</ul>
+				</div>
 			</div>
 
 			<p class='[ lh-copy ]'>Select <b class='[ mh1 f3 v-mid ]'>{{ numberOfAdditionalRacesNeeded }}</b> additional races</p>
