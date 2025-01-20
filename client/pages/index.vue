@@ -1,20 +1,20 @@
 <template>
-	<div>
-		<article class='[ mb3 ]'>
-			Twilight Imperium 4 (TI4) race randomizer you can share with friends.
-		</article>
+	<article class='[ tc ]'>
+		<header class='[ mb4 ]'>
+			<h1 class='[ f4 ]'>Twilight Imperium 4 (TI4) race randomizer you can share with friends.</h1>
+		</header>
 
 		<Section>
 			<Title class='[ mt0 ]'>Players</Title>
 			<p class='[ lh-copy ]'>
 				Number of players: <b class='[ ml1 f3 v-mid ]'>{{ players.length }}</b>
 			</p>
-			<div class='[ mb4 flex flex-row justify-around ]'>
+			<div class='[ mb4 flex flex-row justify-center ]' style='gap: 3rem;'>
 				<Button styling='d' @click.native='addPlayer'> Add player </Button>
 				<Button styling='h' @click.native='removePlayer'> Remove player </Button>
 			</div>
 			<div>
-				<label class='[ dib mb2 ]'>Add names seperated by <b>,</b></label>
+				<label class='[ db mb2 ]'>Add names seperated by <b>,</b></label>
 				<textarea
 				v-model='player_names'
 				placeholder='Bob, Roy, June' rows='4'
@@ -121,7 +121,7 @@
 				/>
 			</div>
 
-			<div class='[ tc ]'>
+			<div>
 				<Button styling='c'
 				:href='"/shared#" + generatePlayersString()'
 				class='[ mt3 ]'
@@ -130,16 +130,16 @@
 				</Button>
 			</div>
 		</Section>
-	</div>
+	</article>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
 import Button from '~/components/Button'
 import Player from '~/components/Player'
 import Section from '~/components/Section'
 import SymbolLegend from '~/components/SymbolLegend'
 import Title from '~/components/Title'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
 	computed: {
@@ -180,10 +180,10 @@ export default {
 
 		// Getters for non-trivial things
 		...mapGetters ([
-			'playerCount',
 			'activeRaces',
 			'minNumberOfRaces',
-			'numberOfAdditionalRacesNeeded'
+			'numberOfAdditionalRacesNeeded',
+			'playerCount',
 		])
 	},
 
@@ -215,7 +215,7 @@ export default {
 		Player,
 		Section,
 		SymbolLegend,
-		Title
+		Title,
 	}
 }
 </script>

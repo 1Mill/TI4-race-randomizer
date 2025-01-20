@@ -1,7 +1,7 @@
 <template>
-	<div
+	<section
 	class='[ mb5 tc ]'
 	>
 		<slot />
-	</div>
+	</section>
 </template>
