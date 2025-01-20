@@ -1,12 +1,10 @@
-version: '3'
-
 services:
   client:
     command: npm run dev
     environment:
       NUXT_HOST: 0.0.0.0
       NUXT_PORT: 8080
-    image: node:12-alpine
+    image: node:20-alpine
     ports:
       - 8080:8080
     volumes:
