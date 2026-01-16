@@ -16,6 +16,11 @@
       "active": true
     },
     {
+      "name": "Thunder's Edge",
+      "key": "te",
+      "active": true
+    },
+    {
       "name": "Discordant Stars (Unofficial)",
       "key": "discordant_stars",
       "active": false
